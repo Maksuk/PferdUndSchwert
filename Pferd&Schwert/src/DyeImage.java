@@ -52,16 +52,23 @@ class DyeImage
         
         JFrame f2 = new JFrame();
         BufferedImage image2 = ImageIO.read(new File("resources/Pferd2b.png"));
-        image2 = dye(image2, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 80));
+        image2 = dye(image2, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
         BufferedImage image3 = ImageIO.read(new File("resources/Prerd2h.png"));
-        BufferedImage combined = new BufferedImage(image2.getWidth(), image2.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image4 = ImageIO.read(new File("resources/SchildS2.png"));
+        BufferedImage image5 = ImageIO.read(new File("resources/Schild2.png"));
+        image5 = dye(image5, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
+        BufferedImage combined = new BufferedImage(image4.getWidth(), image4.getHeight(), BufferedImage.TYPE_INT_ARGB);
         
         Graphics g = combined.getGraphics();
-        g.drawImage(image2, 0, 0, null);
-        g.drawImage(image3, 0, 0, null);
+        g.drawImage(image5, 0, 0, null);
+        g.drawImage(image2, 120, 120, null);
+        g.drawImage(image3, 120, 120, null);
+        g.drawImage(image4, 0, 0, null);
         
         JPanel panel2 = new JPanel(new GridLayout(1,0));
+        panel2.setBackground(Color.DARK_GRAY);
         panel2.add(new JLabel(new ImageIcon(combined)));
+//        panel2.add(new JLabel(new ImageIcon(image4)));
         f2.getContentPane().add(panel2);
         f2.pack();
         f2.setVisible(true);
