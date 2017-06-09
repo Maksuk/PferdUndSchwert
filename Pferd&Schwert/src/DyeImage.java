@@ -48,7 +48,7 @@ class DyeImage
         panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),255,r.nextInt(256),100)))));
         f.getContentPane().add(panel);
         f.pack();
-        f.setVisible(true);
+//        f.setVisible(true);
         
         JFrame f2 = new JFrame();
         BufferedImage image2 = ImageIO.read(new File("resources/Pferd2b.png"));
@@ -56,13 +56,16 @@ class DyeImage
         BufferedImage image3 = ImageIO.read(new File("resources/Prerd2h.png"));
         BufferedImage image4 = ImageIO.read(new File("resources/SchildS2.png"));
         BufferedImage image5 = ImageIO.read(new File("resources/Schild2.png"));
+        BufferedImage image6 = image[r.nextInt(4)];
+        image6 = dye(image6, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
+        
         image5 = dye(image5, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
         BufferedImage combined = new BufferedImage(image4.getWidth(), image4.getHeight(), BufferedImage.TYPE_INT_ARGB);
         
         Graphics g = combined.getGraphics();
         g.drawImage(image5, 0, 0, null);
-        g.drawImage(image2, 120, 120, null);
-        g.drawImage(image3, 120, 120, null);
+        g.drawImage(image6, 120, 120, null);
+//        g.drawImage(image3, 120, 120, null);
         g.drawImage(image4, 0, 0, null);
         
         JPanel panel2 = new JPanel(new GridLayout(1,0));
