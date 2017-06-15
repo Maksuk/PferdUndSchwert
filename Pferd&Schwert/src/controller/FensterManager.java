@@ -1,12 +1,12 @@
 package controller;
 
-import model.Generator;
+import model.NamesGenerator;
 
 public class FensterManager {
 
-	public static Generator generator;
+	public static NamesGenerator generator;
 	
-	public FensterManager(Generator g) {
+	public FensterManager(NamesGenerator g) {
 		FensterManager.generator = g;
 	}
 	

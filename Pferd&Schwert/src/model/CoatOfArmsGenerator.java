@@ -8,29 +8,10 @@ import java.util.Random;
 import javax.swing.*;
 import javax.imageio.*;
 
-class DyeImage
-{
-    public static void main(String args[])
-    {
-        SwingUtilities.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                try
-                {
-                    new DyeImage();
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
-
-    public DyeImage() throws Exception
-    {
+class CoatOfArmsGenerator {
+    
+    public CoatOfArmsGenerator() throws Exception {
+    	
         JFrame f = new JFrame();
         Random r = new Random();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,8 +63,7 @@ class DyeImage
     }
 
 
-    private static BufferedImage dye(BufferedImage image, Color color)
-    {
+    private static BufferedImage dye(BufferedImage image, Color color) {
         int w = image.getWidth();
         int h = image.getHeight();
         BufferedImage dyed = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
@@ -95,5 +75,4 @@ class DyeImage
         g.dispose();
         return dyed;
     }
-
 }

@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-public class Generator {
+public class NamesGenerator {
 
 	Random random = new Random();
 	static String[] name_1 = new String[200];
@@ -27,7 +27,7 @@ public class Generator {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Stadt_1.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Stadt_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -52,7 +52,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Stadt_2.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Stadt_2.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -77,7 +77,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Name_1.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Name_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -102,7 +102,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Männlich.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Männlich.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -127,7 +127,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Weiblich.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Weiblich.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -152,7 +152,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Ehrenname_1.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Ehrenname_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -177,7 +177,7 @@ public class Generator {
         br = null;
         try {
             br = new BufferedReader(new FileReader(new File(
-                    "./dateien/Ehrenname_2.txt")));
+                    ".\\Pferd&Schwert\\resources\\names\\Ehrenname_2.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
