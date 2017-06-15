@@ -1,0 +1,96 @@
+package view;
+
+import javax.swing.*;
+
+import controller.FensterManager;
+
+import java.awt.*;
+import java.awt.event.*;
+
+
+public class Fenster extends JFrame {
+
+	public Fenster(String standardname, FensterManager m) {
+		//Fenster erzeugen
+		super("Heldengenerator");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		getContentPane().setLayout(new FlowLayout());
+		
+		//Panels erzeugen
+		JPanel grundPanel = new JPanel(new BorderLayout());
+		JPanel namensPanel = new JPanel(new BorderLayout());
+		JPanel nObenPanel = new JPanel(new BorderLayout());
+		JPanel nUntenPanel = new JPanel(new BorderLayout());
+		JPanel nlinksPanel = new JPanel(new BorderLayout());
+		JPanel nrechtsPanel = new JPanel(new BorderLayout());
+		JPanel sLinksPanel = new JPanel(new BorderLayout());
+		JPanel sMittePanel = new JPanel(new BorderLayout());
+		JPanel sRechtsPanel = new JPanel(new BorderLayout());
+		grundPanel.setBackground(new Color(200,200,255));
+		namensPanel.setBackground(new Color(200,200,255));
+		nObenPanel.setBackground(new Color(200,200,255));
+		nUntenPanel.setBackground(new Color(200,200,255));
+		nlinksPanel.setBackground(new Color(200,200,255));
+		nrechtsPanel.setBackground(new Color(200,200,255));
+		sLinksPanel.setBackground(new Color(200,200,255));
+		sMittePanel.setBackground(new Color(200,200,255));
+		sRechtsPanel.setBackground(new Color(200,200,255));
+		grundPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
+		namensPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 50, 5));
+		nrechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		sRechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+
+		nObenPanel.add(nlinksPanel, BorderLayout.WEST);
+		nObenPanel.add(nrechtsPanel, BorderLayout.EAST);
+		namensPanel.add(nObenPanel, BorderLayout.NORTH);
+		namensPanel.add(nUntenPanel, BorderLayout.SOUTH);
+		grundPanel.add(namensPanel, BorderLayout.CENTER);
+	    getContentPane().add(grundPanel);
+	    
+		//Label mit Heldennamen Text
+		JLabel text1 = new JLabel( "Dein Heldenname:",JLabel.CENTER);
+		text1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		nlinksPanel.add(text1,BorderLayout.WEST);
+		
+		//Textfeld für Namen
+		JTextField textField = new JTextField(standardname);
+		textField.setPreferredSize( new Dimension( 300, 24 ) );
+		nlinksPanel.add(textField,BorderLayout.EAST);
+		
+		//Knopf für Neugenerierung von Namen
+		JButton button = new JButton("Neu");
+		button.setActionCommand("Neu");
+		button.setBackground(new Color(150,150,255));
+		nrechtsPanel.add(button,BorderLayout.CENTER);
+		
+		//Geschlechterwahl Radiobuttons
+		JRadioButton maennlich = new JRadioButton("männlich");
+		maennlich.setActionCommand("männlich");
+	    maennlich.setSelected(true);
+	    maennlich.setBackground(new Color(200,200,255));
+	    maennlich.setBorder(BorderFactory.createEmptyBorder(10, 150, 0, 0));
+	    JRadioButton weiblich = new JRadioButton("weiblich");
+		weiblich.setActionCommand("weiblich");
+		weiblich.setBackground(new Color(200,200,255));
+		weiblich.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 150));
+		
+		ButtonGroup group = new ButtonGroup();
+	    group.add(maennlich);
+	    group.add(weiblich);
+		
+	    nUntenPanel.add(maennlich, BorderLayout.WEST);
+	    nUntenPanel.add(weiblich, BorderLayout.EAST);
+	  		
+	    //Button Listener
+		MyListener l = new MyListener(textField,m);
+		button.addActionListener(l);
+		maennlich.addActionListener(l);
+		weiblich.addActionListener(l);
+		
+		// Fenstereinstellungen
+		setLocation(250, 190);
+		setSize(500, 120);
+		setVisible(true);
+		getContentPane().setBackground(new Color(200,200,255));
+	}
+}

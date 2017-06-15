@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
@@ -34,10 +36,10 @@ class DyeImage
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         BufferedImage[] image = new BufferedImage[4];
-        image[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Pferd2b.png"));
-        image[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Stern2b.png"));
-        image[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Stern1b.png"));
-        image[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Rad1b.png"));
+        image[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
+        image[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern2b.png"));
+        image[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern1b.png"));
+        image[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Rad1b.png"));
         JPanel panel = new JPanel(new GridLayout(2,2));
         panel.setBackground(Color.DARK_GRAY);
         panel.add(new JLabel(new ImageIcon(image[0])));
@@ -51,11 +53,11 @@ class DyeImage
 //        f.setVisible(true);
         
         JFrame f2 = new JFrame();
-        BufferedImage image2 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Pferd2b.png"));
+        BufferedImage image2 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
         image2 = dye(image2, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
-        BufferedImage image3 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Prerd2h.png"));
-        BufferedImage image4 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\SchildS2.png"));
-        BufferedImage image5 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\Schild2.png"));
+        BufferedImage image3 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Prerd2h.png"));
+        BufferedImage image4 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildS2.png"));
+        BufferedImage image5 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Schild2.png"));
         BufferedImage image6 = image[r.nextInt(4)];
         image6 = dye(image6, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
         
