@@ -9,57 +9,62 @@ import javax.swing.*;
 import javax.imageio.*;
 
 class CoatOfArmsGenerator {
+	
+	public Random r = new Random();
+	public BufferedImage[] symbols = new BufferedImage[4];
+	public BufferedImage[] schieldOverlays = new BufferedImage[12];
+    private BufferedImage schildschatten = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildS2.png"));
+    private BufferedImage schild = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Schild2.png"));
     
     public CoatOfArmsGenerator() throws Exception {
     	
-        JFrame f = new JFrame();
-        Random r = new Random();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        BufferedImage[] image = new BufferedImage[4];
-        image[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
-        image[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern2b.png"));
-        image[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern1b.png"));
-        image[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Rad1b.png"));
-        JPanel panel = new JPanel(new GridLayout(2,2));
-        panel.setBackground(Color.DARK_GRAY);
-        panel.add(new JLabel(new ImageIcon(image[0])));
-        panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),80)))));
-        panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),255,r.nextInt(256),80)))));
-        panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),0,r.nextInt(256),100)))));
-        panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),100)))));
-        panel.add(new JLabel(new ImageIcon(dye(image[r.nextInt(4)], new Color(r.nextInt(256),255,r.nextInt(256),100)))));
-        f.getContentPane().add(panel);
-        f.pack();
-//        f.setVisible(true);
+        symbols[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
+        symbols[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern2b.png"));
+        symbols[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern1b.png"));
+        symbols[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Rad1b.png"));
         
+        schieldOverlays[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHalb.png"));
+        schieldOverlays[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHalb2.png"));
+        schieldOverlays[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildViertel2.png"));
+        schieldOverlays[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildViertel.png"));
+        schieldOverlays[4] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHorizont.png"));
+        schieldOverlays[5] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHorizont2.png"));
+        schieldOverlays[6] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDiagonal.png"));
+        schieldOverlays[7] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDiagonal2.png"));
+        schieldOverlays[8] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck.png"));
+        schieldOverlays[9] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck2.png"));
+        schieldOverlays[10] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel.png"));
+        schieldOverlays[11] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel2.png"));
+
         JFrame f2 = new JFrame();
-        BufferedImage image2 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
-        image2 = dye(image2, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
-        BufferedImage image3 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Prerd2h.png"));
-        BufferedImage image4 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildS2.png"));
-        BufferedImage image5 = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Schild2.png"));
-        BufferedImage image6 = image[r.nextInt(4)];
-        image6 = dye(image6, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 100));
-        
-        image5 = dye(image5, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
-        BufferedImage combined = new BufferedImage(image4.getWidth(), image4.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        
-        Graphics g = combined.getGraphics();
-        g.drawImage(image5, 0, 0, null);
-        g.drawImage(image6, 120, 120, null);
-//        g.drawImage(image3, 120, 120, null);
-        g.drawImage(image4, 0, 0, null);
-        
         JPanel panel2 = new JPanel(new GridLayout(1,0));
         panel2.setBackground(Color.DARK_GRAY);
-        panel2.add(new JLabel(new ImageIcon(combined)));
+        panel2.add(new JLabel(new ImageIcon(GenerateCoatOfArms())));
 //        panel2.add(new JLabel(new ImageIcon(image4)));
         f2.getContentPane().add(panel2);
         f2.pack();
-        f2.setVisible(true);
+        f2.setVisible(true);       
         
+    }
+    
+    public BufferedImage GenerateCoatOfArms() throws IOException{
+        BufferedImage wappen = symbols[r.nextInt(4)];
+        BufferedImage schildOverlay = schieldOverlays[r.nextInt(12)];
+        wappen = dye(wappen, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 120));
         
+        schild = dye(schild, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
+        schildOverlay = dye(schildOverlay, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
+        BufferedImage combined = new BufferedImage(schildschatten.getWidth(), schildschatten.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        
+        Graphics g = combined.getGraphics();
+        g.drawImage(schild, 0, 0, null);
+        g.drawImage(schildOverlay, 0, 0, null);
+        g.drawImage(wappen, 145, 145, null);
+//        g.drawImage(image3, 120, 120, null);
+        g.drawImage(schildschatten, 0, 0, null);
+        
+		return combined;
     }
 
 
