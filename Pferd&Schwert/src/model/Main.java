@@ -14,24 +14,14 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		NamesGenerator g = new NamesGenerator();
-		CoatOfArmsGenerator c = new CoatOfArmsGenerator();
+		String path = ".\\Pferd&Schwert\\resources\\";
+		
+		NamesGenerator g = new NamesGenerator(path);
+		CoatOfArmsGenerator c = new CoatOfArmsGenerator(path);
 		FensterManager m = new FensterManager(g,c);
 		g.arraysFuellen();
 		BufferedImage wappen = c.GenerateCoatOfArms();
 		
 		Fenster f = new Fenster(g.Vorname + " " + g.Ehrenname + " von " + g.Stadt, wappen, m);
-		
-	    SwingUtilities.invokeLater(new Runnable() {
-	    	
-	    	public void run() {
-	    		try {
-	    			new CoatOfArmsGenerator();
-	            }
-	            catch (Exception e) {
-	            	e.printStackTrace();
-	            }
-	        }
-	     });
 	}
 }

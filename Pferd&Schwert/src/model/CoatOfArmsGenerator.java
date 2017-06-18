@@ -11,36 +11,34 @@ import javax.imageio.*;
 public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
-	public BufferedImage[] symbols = new BufferedImage[4];
-	public BufferedImage[] schieldOverlays = new BufferedImage[12];
-    private BufferedImage schildschatten = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildS2.png"));
-    private BufferedImage schild = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Schild2.png"));
+	public String path;
+	public String[] symbolNames = {"Pferd2b", "Stern2b", "Stern1b", "Rad1b"};
+	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
+	public BufferedImage[] symbols = new BufferedImage[symbolNames.length];
+	public BufferedImage[] shieldOverlays = new BufferedImage[overlayNames.length];
+    private BufferedImage schildschatten;
+    private BufferedImage schild;
     
-    public CoatOfArmsGenerator() throws Exception {
+    public CoatOfArmsGenerator(String dPath) throws Exception {
     	
-
-        symbols[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Pferd2b.png"));
-        symbols[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern2b.png"));
-        symbols[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Stern1b.png"));
-        symbols[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\Rad1b.png"));
-        
-        schieldOverlays[0] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHalb.png"));
-        schieldOverlays[1] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHalb2.png"));
-        schieldOverlays[2] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildViertel2.png"));
-        schieldOverlays[3] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildViertel.png"));
-        schieldOverlays[4] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHorizont.png"));
-        schieldOverlays[5] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildHorizont2.png"));
-        schieldOverlays[6] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDiagonal.png"));
-        schieldOverlays[7] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDiagonal2.png"));
-        schieldOverlays[8] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck.png"));
-        schieldOverlays[9] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck2.png"));
-        schieldOverlays[10] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel.png"));
-        schieldOverlays[11] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel2.png"));  
+    	// datipfad bestimmen
+    	this.path = dPath + "images\\";
+    	
+    	// bilder laden
+    	for(int i=0; i<symbolNames.length; i++) {
+    		symbols[i] = ImageIO.read(new File(path + symbolNames[i]+ ".png"));
+    	}
+    	for(int i=0; i<overlayNames.length; i++) {
+    		shieldOverlays[i] = ImageIO.read(new File(path + "Schild" + overlayNames[i]+ ".png"));
+    	}
+    	schild = ImageIO.read(new File(path + "Schild2.png"));
+    	schildschatten = ImageIO.read(new File(path + "SchildS2.png"));
     }
     
+    // neues Wappen generieren
     public BufferedImage GenerateCoatOfArms() throws IOException{
         BufferedImage wappen = symbols[r.nextInt(4)];
-        BufferedImage schildOverlay = schieldOverlays[r.nextInt(12)];
+        BufferedImage schildOverlay = shieldOverlays[r.nextInt(12)];
         wappen = dye(wappen, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 120));
         
         schild = dye(schild, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
@@ -57,7 +55,8 @@ public class CoatOfArmsGenerator {
 		return combined;
     }
 
-
+    
+    // bild einfaerben
     private static BufferedImage dye(BufferedImage image, Color color) {
         int w = image.getWidth();
         int h = image.getHeight();

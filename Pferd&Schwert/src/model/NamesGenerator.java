@@ -10,6 +10,7 @@ import java.util.Random;
 public class NamesGenerator {
 
 	Random random = new Random();
+	static String path;
 	static String[] name_1 = new String[200];
 	static String[] man = new String[200];
 	static String[] frau = new String[200];
@@ -21,13 +22,18 @@ public class NamesGenerator {
 	public String Ehrenname;
 	public String Stadt;
 	
+	// Konstruktor
+	public NamesGenerator(String path) {
+		this.path = path + "names\\";
+		
+	}
+	
 	public void arraysFuellen() {
 
         // Schreibt Namensteile von Textdatei in Array
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Stadt_1.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Stadt_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -51,8 +57,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Stadt_2.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Stadt_2.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -76,8 +81,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Name_1.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Name_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -101,8 +105,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Männlich.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Männlich.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -126,8 +129,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Weiblich.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Weiblich.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -151,8 +153,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Ehrenname_1.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Ehrenname_1.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
@@ -176,8 +177,7 @@ public class NamesGenerator {
         
         br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(
-                    ".\\Pferd&Schwert\\resources\\names\\Ehrenname_2.txt")));
+            br = new BufferedReader(new FileReader(new File(path + "Ehrenname_2.txt")));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {

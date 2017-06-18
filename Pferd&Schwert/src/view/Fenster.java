@@ -16,12 +16,13 @@ public class Fenster extends JFrame {
 
 	public Fenster(String standardname, BufferedImage wappen, FensterManager m) {
 		//Fenster erzeugen
-		super("Heldengenerator");
+		super("Pferd & Schwert");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(new FlowLayout());
 		
 		//Panels erzeugen
 		JPanel grundPanel = new JPanel(new BorderLayout());
+		JPanel namensGrundPanel = new JPanel(new BorderLayout());
 		JPanel namensPanel = new JPanel(new BorderLayout());
 		JPanel nObenPanel = new JPanel(new BorderLayout());
 		JPanel nUntenPanel = new JPanel(new BorderLayout());
@@ -36,6 +37,7 @@ public class Fenster extends JFrame {
 		
 		// Panelfarben festlegen
 		grundPanel.setBackground(new Color(200,200,255));
+		namensGrundPanel.setBackground(new Color(200,200,255));
 		namensPanel.setBackground(new Color(200,200,255));
 		nObenPanel.setBackground(new Color(200,200,255));
 		nUntenPanel.setBackground(new Color(200,200,255));
@@ -52,24 +54,26 @@ public class Fenster extends JFrame {
 		grundPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
 		namensPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 50, 5));
 		nrechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+		nlinksPanel.setBorder(BorderFactory.createEmptyBorder(0, 120, 0, 0));
 		sRechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-		wappenGrundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
+		wappenGrundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
 		
 		// Fenster zusammenpuzzeln
 		nObenPanel.add(nlinksPanel, BorderLayout.WEST);
 		nObenPanel.add(nrechtsPanel, BorderLayout.EAST);
 		namensPanel.add(nObenPanel, BorderLayout.NORTH);
 		namensPanel.add(nUntenPanel, BorderLayout.SOUTH);
+		namensGrundPanel.add(namensPanel, BorderLayout.CENTER);
 		wappenGrundPanel.add(wappenTextPanel, BorderLayout.NORTH);
 		wappenGrundPanel.add(wappenBildPanel, BorderLayout.CENTER);
-		grundPanel.add(namensPanel, BorderLayout.CENTER);
+		grundPanel.add(namensGrundPanel, BorderLayout.CENTER);
 		grundPanel.add(wappenGrundPanel, BorderLayout.NORTH);
 	    getContentPane().add(grundPanel);
 	    
 		//Label mit Heldennamen Text
 		JLabel text1 = new JLabel( "Dein Heldenname:",JLabel.CENTER);
-		text1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		nlinksPanel.add(text1,BorderLayout.WEST);
+		text1.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+		namensGrundPanel.add(text1,BorderLayout.NORTH);
 		
 		//Textfeld für Namen
 		JTextField textField = new JTextField(standardname);
