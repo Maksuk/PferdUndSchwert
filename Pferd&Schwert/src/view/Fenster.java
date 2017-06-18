@@ -1,16 +1,20 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import controller.FensterManager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Fenster extends JFrame {
 
-	public Fenster(String standardname, FensterManager m) {
+	public Fenster(String standardname, BufferedImage wappen, FensterManager m) {
 		//Fenster erzeugen
 		super("Heldengenerator");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,6 +30,11 @@ public class Fenster extends JFrame {
 		JPanel sLinksPanel = new JPanel(new BorderLayout());
 		JPanel sMittePanel = new JPanel(new BorderLayout());
 		JPanel sRechtsPanel = new JPanel(new BorderLayout());
+		JPanel wappenGrundPanel = new JPanel(new BorderLayout());
+		JPanel wappenTextPanel = new JPanel(new BorderLayout());
+		JPanel wappenBildPanel = new JPanel(new BorderLayout());
+		
+		// Panelfarben festlegen
 		grundPanel.setBackground(new Color(200,200,255));
 		namensPanel.setBackground(new Color(200,200,255));
 		nObenPanel.setBackground(new Color(200,200,255));
@@ -35,16 +44,26 @@ public class Fenster extends JFrame {
 		sLinksPanel.setBackground(new Color(200,200,255));
 		sMittePanel.setBackground(new Color(200,200,255));
 		sRechtsPanel.setBackground(new Color(200,200,255));
+		wappenGrundPanel.setBackground(new Color(200,200,255));
+		wappenTextPanel.setBackground(new Color(200,200,255));
+		wappenBildPanel.setBackground(Color.DARK_GRAY);
+		
+		// Raender festlegen
 		grundPanel.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
 		namensPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 50, 5));
 		nrechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
 		sRechtsPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-
+		wappenGrundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
+		
+		// Fenster zusammenpuzzeln
 		nObenPanel.add(nlinksPanel, BorderLayout.WEST);
 		nObenPanel.add(nrechtsPanel, BorderLayout.EAST);
 		namensPanel.add(nObenPanel, BorderLayout.NORTH);
 		namensPanel.add(nUntenPanel, BorderLayout.SOUTH);
+		wappenGrundPanel.add(wappenTextPanel, BorderLayout.NORTH);
+		wappenGrundPanel.add(wappenBildPanel, BorderLayout.CENTER);
 		grundPanel.add(namensPanel, BorderLayout.CENTER);
+		grundPanel.add(wappenGrundPanel, BorderLayout.NORTH);
 	    getContentPane().add(grundPanel);
 	    
 		//Label mit Heldennamen Text
@@ -80,16 +99,22 @@ public class Fenster extends JFrame {
 		
 	    nUntenPanel.add(maennlich, BorderLayout.WEST);
 	    nUntenPanel.add(weiblich, BorderLayout.EAST);
-	  		
+	    	
+	    //Label fuer Wappen
+	    JLabel text2 = new JLabel( "Dein Wappen:",JLabel.CENTER);
+		text2.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+		wappenTextPanel.add(text2,BorderLayout.CENTER);
+	    wappenBildPanel.add(new JLabel(new ImageIcon(wappen)));
+	    
 	    //Button Listener
-		MyListener l = new MyListener(textField,m);
+		MyListener l = new MyListener(textField, wappenBildPanel, m);
 		button.addActionListener(l);
 		maennlich.addActionListener(l);
 		weiblich.addActionListener(l);
 		
 		// Fenstereinstellungen
-		setLocation(250, 190);
-		setSize(500, 120);
+		setLocation(200, 10);
+		setSize(800, 900);
 		setVisible(true);
 		getContentPane().setBackground(new Color(200,200,255));
 	}

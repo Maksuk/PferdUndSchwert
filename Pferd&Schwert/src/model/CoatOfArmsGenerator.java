@@ -8,7 +8,7 @@ import java.util.Random;
 import javax.swing.*;
 import javax.imageio.*;
 
-class CoatOfArmsGenerator {
+public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public BufferedImage[] symbols = new BufferedImage[4];
@@ -35,17 +35,7 @@ class CoatOfArmsGenerator {
         schieldOverlays[8] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck.png"));
         schieldOverlays[9] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildDreieck2.png"));
         schieldOverlays[10] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel.png"));
-        schieldOverlays[11] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel2.png"));
-
-        JFrame f2 = new JFrame();
-        JPanel panel2 = new JPanel(new GridLayout(1,0));
-        panel2.setBackground(Color.DARK_GRAY);
-        panel2.add(new JLabel(new ImageIcon(GenerateCoatOfArms())));
-//        panel2.add(new JLabel(new ImageIcon(image4)));
-        f2.getContentPane().add(panel2);
-        f2.pack();
-        f2.setVisible(true);       
-        
+        schieldOverlays[11] = ImageIO.read(new File(".\\Pferd&Schwert\\resources\\images\\SchildQuerViertel2.png"));  
     }
     
     public BufferedImage GenerateCoatOfArms() throws IOException{
