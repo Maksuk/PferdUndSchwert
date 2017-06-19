@@ -14,11 +14,12 @@ public class CoatOfArmsGenerator {
 	public String path;
 	public String[] symbolNames = {"Pferd2b", "Stern2b", "Stern1b", "Rad1b"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
+	public Color[] farben = {new Color(240,240,240), new Color(30,30,30), new Color(150,0,0), new Color(0,150,0), new Color(0,0,150)};
 	public BufferedImage[] symbols = new BufferedImage[symbolNames.length];
 	public BufferedImage[] shieldOverlays = new BufferedImage[overlayNames.length];
     private BufferedImage schildschatten;
     private BufferedImage schild;
-    
+    // Konstruktor
     public CoatOfArmsGenerator(String dPath) throws Exception {
     	
     	// datipfad bestimmen
@@ -37,27 +38,47 @@ public class CoatOfArmsGenerator {
     
     // neues Wappen generieren
     public BufferedImage GenerateCoatOfArms() throws IOException{
-        BufferedImage wappen = symbols[r.nextInt(4)];
-        BufferedImage schildOverlay = shieldOverlays[r.nextInt(12)];
-        wappen = dye(wappen, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 120));
+    	
+    	// Schild einfaerben
+    	Color schildFarbe = farben[r.nextInt(farben.length)];
+        schild = dye(schild, new Color(schildFarbe.getRed(), schildFarbe.getGreen(), schildFarbe.getBlue(), 255));
+    	
+        // Overlay auswuerfeln
+        BufferedImage schildOverlay = shieldOverlays[r.nextInt(shieldOverlays.length)];
         
-        schild = dye(schild, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
-        schildOverlay = dye(schildOverlay, new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256), 255));
+        // Overlay einfaerben
+        Color overlayFarbe = farben[r.nextInt(farben.length)];
+        while(overlayFarbe.equals(schildFarbe)) {
+        	overlayFarbe = farben[r.nextInt(farben.length)];
+        }
+        schildOverlay = dye(schildOverlay, new Color(overlayFarbe.getRed(), overlayFarbe.getGreen(), overlayFarbe.getBlue(), 255));
+        
+    	// Zeichen auswuerfeln
+        BufferedImage zeichen = symbols[r.nextInt(symbols.length)];
+        
+        // Zeichen einfaerben
+        Color zeichenFarbe = farben[r.nextInt(farben.length)];
+        while(zeichenFarbe.equals(schildFarbe) || zeichenFarbe.equals(overlayFarbe)) {
+        	zeichenFarbe = farben[r.nextInt(farben.length)];
+        }
+        zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 120));
+        
+        // Alles zusammensetzen
         BufferedImage combined = new BufferedImage(schildschatten.getWidth(), schildschatten.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        
         Graphics g = combined.getGraphics();
         g.drawImage(schild, 0, 0, null);
         g.drawImage(schildOverlay, 0, 0, null);
-        g.drawImage(wappen, 145, 145, null);
-//        g.drawImage(image3, 120, 120, null);
+        g.drawImage(zeichen, 145, 145, null);
+      //g.drawImage(image3, 120, 120, null);
         g.drawImage(schildschatten, 0, 0, null);
         
 		return combined;
     }
 
     
-    // bild einfaerben
+    // faerbt ein Bild in einer Farbe ein
     private static BufferedImage dye(BufferedImage image, Color color) {
+    	
         int w = image.getWidth();
         int h = image.getHeight();
         BufferedImage dyed = new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
@@ -67,6 +88,7 @@ public class CoatOfArmsGenerator {
         g.setColor(color);
         g.fillRect(0,0,w,h);
         g.dispose();
+        
         return dyed;
     }
 }

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
-public class MyListener implements ActionListener
+public class ButtonListener implements ActionListener
 {
   private JTextField textField;
   private JTextArea textArea;
@@ -16,18 +16,18 @@ public class MyListener implements ActionListener
   private FensterManager m;
   private boolean maennlich = true;
 
-  public MyListener(JTextField tf, JPanel pn, FensterManager ma)
+  // Konstruktor
+  public ButtonListener(JTextField tf, JPanel pn, FensterManager ma)
   {
     textField = tf;
     imagePanel = pn;
     m = ma;
   }
 
- 
-	  
-  
+ // Wenn ein Knopf gedrueckt wurde
   public void actionPerformed(ActionEvent ae) {
 	  
+	  // "Neu" Knopf:
 	  if(ae.getActionCommand().equals("Neu")) {
 		  
 		  // neues Wappen
@@ -52,7 +52,7 @@ public class MyListener implements ActionListener
 		  }
 	  }
 	  
-	  // radiobuttons updaten
+	  // Radiobuttons:
 	  if(ae.getActionCommand().equals("männlich")) {
 		  maennlich = true;
 	  }

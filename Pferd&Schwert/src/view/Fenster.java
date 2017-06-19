@@ -71,7 +71,7 @@ public class Fenster extends JFrame {
 	    getContentPane().add(grundPanel);
 	    
 		//Label mit Heldennamen Text
-		JLabel text1 = new JLabel( "Dein Heldenname:",JLabel.CENTER);
+		JLabel text1 = new JLabel( "Euer Heldenname:",JLabel.CENTER);
 		text1.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
 		namensGrundPanel.add(text1,BorderLayout.NORTH);
 		
@@ -100,18 +100,17 @@ public class Fenster extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 	    group.add(maennlich);
 	    group.add(weiblich);
-		
 	    nUntenPanel.add(maennlich, BorderLayout.WEST);
 	    nUntenPanel.add(weiblich, BorderLayout.EAST);
 	    	
 	    //Label fuer Wappen
-	    JLabel text2 = new JLabel( "Dein Wappen:",JLabel.CENTER);
+	    JLabel text2 = new JLabel( "Euer Wappen:",JLabel.CENTER);
 		text2.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
 		wappenTextPanel.add(text2,BorderLayout.CENTER);
 	    wappenBildPanel.add(new JLabel(new ImageIcon(wappen)));
 	    
 	    //Button Listener
-		MyListener l = new MyListener(textField, wappenBildPanel, m);
+		ButtonListener l = new ButtonListener(textField, wappenBildPanel, m);
 		button.addActionListener(l);
 		maennlich.addActionListener(l);
 		weiblich.addActionListener(l);
