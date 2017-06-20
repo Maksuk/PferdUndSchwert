@@ -12,7 +12,7 @@ public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Pferd2b", "Stern2b", "Stern1b", "Rad1b"};
+	public String[] symbolNames = {"Pferd2b", "Stern2b", "Stern1b", "Rad1b", "Drache1", "Gral1", "Lilie1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public Color[] farben = {new Color(240,240,240), new Color(30,30,30), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
 							 new Color(100,100,255), new Color(0,80,0), new Color(100,100,100), new Color(90,10,90), new Color(200,100,0), new Color(10,90,90), new Color(0,0,80)};
@@ -73,7 +73,7 @@ public class CoatOfArmsGenerator {
         		zeichenFarbe = farben[r.nextInt(farben.length)];
         	}
         	zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 120));
-        	g.drawImage(zeichen, 150, 195, null);
+        	g.drawImage(zeichen, 117, 163, null);
         }
         
         // Schildschatten hinzufügen
