@@ -4,15 +4,13 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.Random;
-
-import javax.swing.*;
 import javax.imageio.*;
 
 public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Pferd2b", "Stern2b", "Stern1b", "Rad1b", "Drache1", "Gral1", "Lilie1"}; 
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1"}; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
 	public Color[] farben = {new Color(240,240,240), new Color(30,30,30), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
@@ -30,16 +28,16 @@ public class CoatOfArmsGenerator {
     	
     	// bilder laden
     	for(int i=0; i<symbolNames.length; i++) {
-    		symbols[i] = ImageIO.read(new File(path + symbolNames[i]+ ".png"));
+    		symbols[i] = ImageIO.read(new File(path + "symbols\\" + symbolNames[i]+ ".png"));
     	}
     	for(int i=0; i<overlayNames.length; i++) {
-    		shieldOverlays[i] = ImageIO.read(new File(path + "Schild" + overlayNames[i]+ ".png"));
+    		shieldOverlays[i] = ImageIO.read(new File(path + "overlays\\" + overlayNames[i]+ ".png"));
     	}
     	for(int i=0; i<patternNames.length; i++) {
-    		patterns[i] = ImageIO.read(new File(path + patternNames[i]+ ".png"));
+    		patterns[i] = ImageIO.read(new File(path + "patterns\\" + patternNames[i]+ ".png"));
     	}
-    	schild = ImageIO.read(new File(path + "Schild2.png"));
-    	schildschatten = ImageIO.read(new File(path + "SchildS2.png"));
+    	schild = ImageIO.read(new File(path + "others\\" + "Schild.png"));
+    	schildschatten = ImageIO.read(new File(path + "others\\" + "SchildSchatten.png"));
     }
     
     // neues Wappen generieren
