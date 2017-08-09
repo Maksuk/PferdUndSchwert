@@ -1,0 +1,10 @@
+berg
+fall
+fels
+klamm
+kluft
+quell
+steig
+stein
+tal
+thal
