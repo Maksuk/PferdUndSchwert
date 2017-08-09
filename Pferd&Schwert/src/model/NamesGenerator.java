@@ -22,7 +22,7 @@ public class NamesGenerator {
 	public String Ehrenname;
 	public String Stadt;
 	
-	// Konstruktor
+	// Konstruktor 
 	public NamesGenerator(String path) {
 		this.path = path + "names\\";
 		
