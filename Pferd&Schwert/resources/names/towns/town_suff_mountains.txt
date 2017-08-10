@@ -1,10 +1,16 @@
 berg
 fall
 fels
+gipfel
+höh
+höhe
+höhl
+höhle
 klamm
 kluft
 quell
 steig
 stein
+steinen
 tal
 thal

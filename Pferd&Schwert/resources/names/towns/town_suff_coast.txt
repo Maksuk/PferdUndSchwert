@@ -1,4 +1,8 @@
+bucht
+flut
 hafen
 kap
 klipp
 klippen
+küste
+meer
