@@ -16,8 +16,17 @@ public class NamesGenerator {
 	static String[] frau = new String[200];
 	static String[] held_1 = new String[200];
 	static String[] held_2 = new String[200];
-	static String[] stadt_1 = new String[200];
-	static String[] stadt_2 = new String[200];
+	
+	// Listen fuer Stadtnamen
+	static String[] town_prae_default = new String[1000];
+	static String[] town_prae_coast = new String[200];
+	static String[] town_prae_river = new String[200];
+	static String[] town_prae_mountains = new String[200];
+	static String[] town_suff_default = new String[1000];
+	static String[] town_suff_coast = new String[200];
+	static String[] town_suff_river = new String[200];
+	static String[] town_suff_mountains = new String[200];
+	
 	public String Vorname;
 	public String Ehrenname;
 	public String Stadt;
@@ -28,17 +37,17 @@ public class NamesGenerator {
 		
 	}
 	
-	public void arraysFuellen() {
+	// Laed Strings aus einer .txt Liste in ein Array
+	public void ladeListe(String dataname, String[] liste) {
 
-        // Schreibt Namensteile von Textdatei in Array
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(new File(path + "Stadt_1.txt")));
+            br = new BufferedReader(new FileReader(new File(path + dataname)));
             String line = null;
             int n = 0;
             while ((line = br.readLine()) != null) {
 
-                stadt_1[n] = line;
+                liste[n] = line;
                 n++;
             }
         } catch (FileNotFoundException e) {
@@ -54,154 +63,29 @@ public class NamesGenerator {
                 }
             }
         }
+	}
+	
+	public void arraysFuellen() {        
         
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Stadt_2.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                stadt_2[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        // Lade Listen fuer Stadtnamen
+        ladeListe("towns\\town_prae_default.txt", town_prae_default);
+        ladeListe("towns\\town_prae_coast.txt", town_prae_coast);
+        ladeListe("towns\\town_prae_river.txt", town_prae_river);
+        ladeListe("towns\\town_prae_mountains.txt", town_prae_mountains);
+        ladeListe("towns\\town_suff_default.txt", town_suff_default);
+        ladeListe("towns\\town_suff_coast.txt", town_suff_coast);
+        ladeListe("towns\\town_suff_river.txt", town_suff_river);
+        ladeListe("towns\\town_suff_mountains.txt", town_suff_mountains);
         
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Name_1.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                name_1[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Männlich.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                man[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Weiblich.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                frau[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Ehrenname_1.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                held_1[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        br = null;
-        try {
-            br = new BufferedReader(new FileReader(new File(path + "Ehrenname_2.txt")));
-            String line = null;
-            int n = 0;
-            while ((line = br.readLine()) != null) {
-
-                held_2[n] = line;
-                n++;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
+        ladeListe("Name_1.txt", name_1);
+        ladeListe("Männlich.txt", man);
+        ladeListe("Weiblich.txt", frau);
+        ladeListe("Ehrenname_1.txt", held_1);
+        ladeListe("Ehrenname_2.txt", held_2);
+                                                             
         Vorname = maennernamenGenerieren();
         Ehrenname = ehrennamenGenerieren();
-    	Stadt = stadtnamenGenerieren();
+    	Stadt = stadtnamenGenerieren(true,true,true);
     	
         return;
     }
@@ -218,10 +102,11 @@ public class NamesGenerator {
 		return anzahl-1;
 	}
 	
-	
-	public String stadtnamenGenerieren() {
+	// Generiert einen Namen fuer eine Stadt
+	public String stadtnamenGenerieren(boolean coast, boolean river, boolean mountains) {
 		
-		String s = stadt_1[random.nextInt(wortanzahl(stadt_1) + 1)] + stadt_2[random.nextInt(wortanzahl(stadt_2) + 1)];
+		//TODO: Bisher werden nur die default Listen verwendet
+		String s = town_prae_default[random.nextInt(wortanzahl(town_prae_default) + 1)] + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
 		Stadt = s;
 			return s;
 	}
@@ -250,10 +135,10 @@ public class NamesGenerator {
 	public String gesamtnameGenerieren(boolean g) {
 		
 		if(g) {
-			return maennernamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren();
+			return maennernamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren(true,true,true);
 		}
 		else {
-			return frauennamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren();
+			return frauennamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren(true,true,true);
 		}
 	}
 	
