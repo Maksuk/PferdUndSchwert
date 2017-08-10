@@ -65,6 +65,7 @@ public class NamesGenerator {
         }
 	}
 	
+	// Laed alle externen Dateien fuer die Namensgenerierung in Arrays
 	public void arraysFuellen() {        
         
         // Lade Listen fuer Stadtnamen
@@ -77,12 +78,16 @@ public class NamesGenerator {
         ladeListe("towns\\town_suff_river.txt", town_suff_river);
         ladeListe("towns\\town_suff_mountains.txt", town_suff_mountains);
         
+        // Lade Listen fuer Vornamen
         ladeListe("Name_1.txt", name_1);
         ladeListe("Männlich.txt", man);
         ladeListe("Weiblich.txt", frau);
+        
+        // Lade Listen fuer Ehrennamen
         ladeListe("Ehrenname_1.txt", held_1);
         ladeListe("Ehrenname_2.txt", held_2);
-                                                             
+        
+        // Erstelle initialen Namen
         Vorname = maennernamenGenerieren();
         Ehrenname = ehrennamenGenerieren();
     	Stadt = stadtnamenGenerieren(true,true,true);
@@ -90,6 +95,7 @@ public class NamesGenerator {
         return;
     }
 	
+	// Gibt an wie viele Worte in einem Array stehen
 	public int wortanzahl(String[] a) {
 		
 		int anzahl = 0;
@@ -105,10 +111,212 @@ public class NamesGenerator {
 	// Generiert einen Namen fuer eine Stadt
 	public String stadtnamenGenerieren(boolean coast, boolean river, boolean mountains) {
 		
-		//TODO: Bisher werden nur die default Listen verwendet
-		String s = town_prae_default[random.nextInt(wortanzahl(town_prae_default) + 1)] + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
+		// Stadtnamen initialisieren
+		String s = "";
+		String v = "";
+		String n = "";
+		
+		// Unschoen dahingehackte Fallunterscheidung fuer die 8 Faelle von Listenkombinationen:
+		
+		// Fall 1: nur Standardnamen
+		if(!coast && !river && !mountains) {
+			s = town_prae_default[random.nextInt(wortanzahl(town_prae_default) + 1)] + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
+		}
+		
+		// Fall 2: zusaetzlich Kuestennamen
+		else if(coast && !river && !mountains) {
+			
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_coast) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else {
+				v = town_prae_coast[r - wortanzahl(town_prae_default)];
+			}
+			
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_coast) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else {
+				n = town_suff_coast[r - wortanzahl(town_suff_default)];
+			}
+			s = v + n;
+		}
+		
+		// Fall 3: zusaetzlich Flussnamen
+		else if(!coast && river && !mountains) {
+					
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_river) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else {
+				v = town_prae_river[r - wortanzahl(town_prae_default)];
+			}
+					
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_river) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else {
+				n = town_suff_river[r - wortanzahl(town_suff_default)];
+			}
+			s = v + n;
+		}
+
+		// Fall 4: zusaetzlich Bergnamen
+		else if(!coast && !river && mountains) {
+							
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_mountains) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else {
+				v = town_prae_mountains[r - wortanzahl(town_prae_default)];
+			}
+							
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_mountains) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else {
+				n = town_suff_mountains[r - wortanzahl(town_suff_default)];
+			}
+			s = v + n;
+		}
+		
+		// Fall 5: zusaetzlich Kuesten- und Flussnamen
+		else if(coast && river && !mountains) {
+									
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_coast) + wortanzahl(town_prae_river) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else if(r <= wortanzahl(town_prae_default) + wortanzahl(town_prae_coast)){
+				v = town_prae_coast[r - wortanzahl(town_prae_default)];
+			}
+			else {
+				v = town_prae_river[r - wortanzahl(town_prae_default) - wortanzahl(town_prae_coast)];
+			}
+									
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_coast) + wortanzahl(town_suff_river) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else if(r <= wortanzahl(town_suff_default) + wortanzahl(town_suff_coast)){
+				n = town_suff_coast[r - wortanzahl(town_suff_default)];
+			}
+			else {
+				n = town_suff_river[r - wortanzahl(town_suff_default) - wortanzahl(town_suff_coast)];
+			}
+			s = v + n;
+		}
+		
+		// Fall 6: zusaetzlich Fluss- und Bergnamen
+		else if(!coast && river && mountains) {
+											
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_river) + wortanzahl(town_prae_mountains) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else if(r <= wortanzahl(town_prae_default) + wortanzahl(town_prae_river)){
+				v = town_prae_river[r - wortanzahl(town_prae_default)];
+			}
+			else {
+				v = town_prae_mountains[r - wortanzahl(town_prae_default) - wortanzahl(town_prae_river)];
+			}
+											
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_river) + wortanzahl(town_suff_mountains) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else if(r <= wortanzahl(town_suff_default) + wortanzahl(town_suff_river)){
+				n = town_suff_river[r - wortanzahl(town_suff_default)];
+			}
+			else {
+				n = town_suff_mountains[r - wortanzahl(town_suff_default) - wortanzahl(town_suff_river)];
+			}
+			s = v + n;
+		}
+		
+		// Fall 7: zusaetzlich Kuesten- und Bergnamen
+		else if(coast && !river && mountains) {
+													
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_coast) + wortanzahl(town_prae_mountains) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else if(r <= wortanzahl(town_prae_default) + wortanzahl(town_prae_coast)){
+				v = town_prae_coast[r - wortanzahl(town_prae_default)];
+			}
+			else {
+				v = town_prae_mountains[r - wortanzahl(town_prae_default) - wortanzahl(town_prae_coast)];
+			}
+													
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_coast) + wortanzahl(town_suff_mountains) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else if(r <= wortanzahl(town_suff_default) + wortanzahl(town_suff_coast)){
+				n = town_suff_coast[r - wortanzahl(town_suff_default)];
+			}
+			else {
+				n = town_suff_mountains[r - wortanzahl(town_suff_default) - wortanzahl(town_suff_coast)];
+			}
+			s = v + n;
+		}
+		
+		// Fall 8: Namen aus allen Listen
+		else {
+															
+			// Vorsilbe
+			int r = random.nextInt(wortanzahl(town_prae_default) + wortanzahl(town_prae_coast) + wortanzahl(town_prae_river) + wortanzahl(town_prae_mountains) + 1);
+			if(r <= wortanzahl(town_prae_default)) {
+				v = town_prae_default[r];
+			}
+			else if(r <= wortanzahl(town_prae_default) + wortanzahl(town_prae_coast)){
+				v = town_prae_coast[r - wortanzahl(town_prae_default)];
+			}
+			else if(r <= wortanzahl(town_prae_default) + wortanzahl(town_prae_coast) + wortanzahl(town_prae_river)){
+				v = town_prae_river[r - wortanzahl(town_prae_default) - wortanzahl(town_prae_coast)];
+			}
+			else {
+				v = town_prae_mountains[r - wortanzahl(town_prae_default) - wortanzahl(town_prae_coast) - wortanzahl(town_prae_river)];
+			}
+															
+			// Nachsilbe
+			r = random.nextInt(wortanzahl(town_suff_default) + wortanzahl(town_suff_coast) + wortanzahl(town_suff_river) + wortanzahl(town_suff_mountains) + 1);
+			if(r <= wortanzahl(town_suff_default)) {
+				n = town_suff_default[r];
+			}
+			else if(r <= wortanzahl(town_suff_default) + wortanzahl(town_suff_coast)){
+				n = town_suff_coast[r - wortanzahl(town_suff_default)];
+			}
+			else if(r <= wortanzahl(town_suff_default) + wortanzahl(town_suff_coast) + wortanzahl(town_suff_river)){
+				n = town_suff_river[r - wortanzahl(town_suff_default) - wortanzahl(town_suff_coast)];
+			}
+			else {
+				n = town_suff_mountains[r - wortanzahl(town_suff_default) - wortanzahl(town_suff_coast) - wortanzahl(town_suff_river)];
+			}
+			s = v + n;
+		}
+		
+		//TODO: Warum brauchen wir diese Zeile? Irgendwas stimmt nicht mit dem return...
 		Stadt = s;
-			return s;
+		return s;
 	}
 	
 	public String maennernamenGenerieren() {
