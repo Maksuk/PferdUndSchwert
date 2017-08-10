@@ -16,6 +16,6 @@ public class Main {
 		g.arraysFuellen();
 		BufferedImage wappen = c.GenerateCoatOfArms();
 		
-		Fenster f = new Fenster(g.Vorname + " " + g.Ehrenname + " von " + g.Stadt, wappen, m);
+		Fenster f = new Fenster(g.Vorname + " " + g.Ehrenname, g.Stadt, wappen, m);
 	}
 }

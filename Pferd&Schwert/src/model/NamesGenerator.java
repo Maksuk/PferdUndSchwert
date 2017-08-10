@@ -91,7 +91,6 @@ public class NamesGenerator {
         Vorname = maennernamenGenerieren();
         Ehrenname = ehrennamenGenerieren();
     	Stadt = stadtnamenGenerieren(true,true,true);
-    	
         return;
     }
 	
@@ -343,10 +342,10 @@ public class NamesGenerator {
 	public String gesamtnameGenerieren(boolean g) {
 		
 		if(g) {
-			return maennernamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren(true,true,true);
+			return maennernamenGenerieren() + " " + ehrennamenGenerieren();
 		}
 		else {
-			return frauennamenGenerieren() + " " + ehrennamenGenerieren() + " von " + stadtnamenGenerieren(true,true,true);
+			return frauennamenGenerieren() + " " + ehrennamenGenerieren();
 		}
 	}
 	

@@ -9,17 +9,22 @@ import java.io.IOException;
 
 public class ButtonListener implements ActionListener
 {
-  private JTextField textField;
+  private JTextField textFieldN;
+  private JTextField textFieldS;
   private JTextArea textArea;
   private JPanel imagePanel;
   private int e;
   private FensterManager m;
   private boolean maennlich = true;
+  private boolean kueste = true;
+  private boolean fluss = true;
+  private boolean gebirge = true;
 
   // Konstruktor
-  public ButtonListener(JTextField tf, JPanel pn, FensterManager ma)
+  public ButtonListener(JTextField tfn, JTextField tfs, JPanel pn, FensterManager ma)
   {
-    textField = tf;
+    textFieldN = tfn;
+    textFieldS = tfs;
     imagePanel = pn;
     m = ma;
   }
@@ -44,12 +49,16 @@ public class ButtonListener implements ActionListener
 		 // neuer Name
 		  if(maennlich) {
 			  m.nGenerator.gesamtnameGenerieren(true);
-			  textField.setText(m.nGenerator.Vorname + " " + m.nGenerator.Ehrenname + " von " + m.nGenerator.Stadt);
+			  textFieldN.setText(m.nGenerator.Vorname + " " + m.nGenerator.Ehrenname);
 		  }
 		  else {
 			  m.nGenerator.gesamtnameGenerieren(false);
-			  textField.setText(m.nGenerator.Vorname + " " + m.nGenerator.Ehrenname + " von " + m.nGenerator.Stadt);
+			  textFieldN.setText(m.nGenerator.Vorname + " " + m.nGenerator.Ehrenname);
 		  }
+		  
+		  // neue Stadt
+		  m.nGenerator.stadtnamenGenerieren(kueste,fluss,gebirge);
+		  textFieldS.setText(m.nGenerator.Stadt);
 	  }
 	  
 	  // Radiobuttons:
@@ -59,6 +68,16 @@ public class ButtonListener implements ActionListener
 	  if(ae.getActionCommand().equals("weiblich")) {
 		  maennlich = false;
 	  }
-    
+	  
+	  // Checkboxen:
+	  if(ae.getActionCommand().equals("küste")) {
+		  kueste = !kueste;
+	  }
+	  if(ae.getActionCommand().equals("fluss")) {
+		  fluss = !fluss;
+	  }
+	  if(ae.getActionCommand().equals("gebirge")) {
+		  gebirge = !gebirge;
+	  }
   }
 }
