@@ -2,9 +2,13 @@ Anker
 Brandungs
 Flut
 Hummer
+Karpfen
 Krabben
+Kraken
 Lachs
 Möwen
 Muschel
 Salz
+Segel
+Wellen
 Wogen

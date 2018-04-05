@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		String path = ".\\Pferd&Schwert\\resources\\";
+		String path = "..\\Pferd&Schwert\\resources\\";
 		
 		NamesGenerator g = new NamesGenerator(path);
 		CoatOfArmsGenerator c = new CoatOfArmsGenerator(path);

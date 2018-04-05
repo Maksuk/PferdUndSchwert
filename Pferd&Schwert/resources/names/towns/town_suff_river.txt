@@ -1,8 +1,14 @@
 brück
 brücke
+brücken
 damm
 furt
 lauf
 mühle
-wasser
 insel
+quell
+scheid
+schlick
+strom
+strudel
+wasser

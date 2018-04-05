@@ -6,6 +6,7 @@ Hoch
 Hohen
 Kalk
 Ober
+Schiefer
 Schotter
 Spitz
 Stein
