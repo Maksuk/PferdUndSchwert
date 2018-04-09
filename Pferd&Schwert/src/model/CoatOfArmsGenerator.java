@@ -10,7 +10,7 @@ public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1"}; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1"}; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
 	public Color[] farben = {new Color(245,245,245), new Color(30,30,30), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
@@ -30,6 +30,7 @@ public class CoatOfArmsGenerator {
     	for(int i=0; i<symbolNames.length; i++) {
     		symbols[i] = ImageIO.read(new File(path + "symbols\\" + symbolNames[i]+ ".png"));
     	}
+    	System.out.println("Hallo");
     	for(int i=0; i<overlayNames.length; i++) {
     		shieldOverlays[i] = ImageIO.read(new File(path + "overlays\\" + overlayNames[i]+ ".png"));
     	}
@@ -90,7 +91,7 @@ public class CoatOfArmsGenerator {
         	while(zeichenFarbe.equals(schildFarbe) || zeichenFarbe.equals(overlayFarbe) || zeichenFarbe.equals(musterFarbe)) {
         		zeichenFarbe = farben[r.nextInt(farben.length)];
         	}
-        	zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 120));
+        	zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 255));
         	g.drawImage(zeichen, 117, 163, null);
         }
         
