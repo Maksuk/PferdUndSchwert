@@ -10,7 +10,7 @@ public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1"}; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"; //"Pferd2b", "Stern2b", "Stern1b", "Rad1b"
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
 	public Color[] farben = {new Color(250,250,250), new Color(10,10,10), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
@@ -94,17 +94,17 @@ public class CoatOfArmsGenerator {
         	//Zeichenfarbe und -anzahl auswuerfeln
         	zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 255));
         	if(r.nextInt(4)>1){
-            	g.drawImage(zeichen, 77, 123, null);
+            	g.drawImage(zeichen, 78, 124, null);
         	} else {
         		g.drawImage(zeichen.getScaledInstance(200, 200, 2), 50, 90, null);
         		g.drawImage(zeichen.getScaledInstance(200, 200, 2), 300, 90, null);
-        		g.drawImage(zeichen.getScaledInstance(200, 200, 2), 175, 350, null);
+        		g.drawImage(zeichen.getScaledInstance(200, 200, 2), 176, 350, null);
         	}
 
         }
         
         // Schildschatten hinzufuegen
-      g.drawImage(schildschatten, 0, 0, null);
+     // g.drawImage(schildschatten, 0, 0, null);
         
 		return combined;
     }
