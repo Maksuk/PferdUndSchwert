@@ -18,7 +18,7 @@ public class NamesGenerator {
 	static String[] held_2 = new String[200];
 	
 	// Listen fuer Stadtnamen
-	static String[] town_prae_default = new String[1000];
+	static String[] town_prae_default = new String[1200];
 	static String[] town_prae_coast = new String[200];
 	static String[] town_prae_river = new String[200];
 	static String[] town_prae_mountains = new String[200];

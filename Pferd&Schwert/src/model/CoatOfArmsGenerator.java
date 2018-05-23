@@ -10,7 +10,7 @@ public class CoatOfArmsGenerator {
 	
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1"};
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
 	public Color[] farben = {new Color(250,250,250), new Color(10,10,10), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
@@ -83,7 +83,7 @@ public class CoatOfArmsGenerator {
         }
         
     	// Zeichen auswuerfeln
-        BufferedImage zeichen = symbols[r.nextInt(symbols.length-1)];
+        BufferedImage zeichen = symbols[r.nextInt(symbols.length)];
         Color zeichenFarbe = farben[r.nextInt(farben.length)];
         if(zeichen != null) {
         

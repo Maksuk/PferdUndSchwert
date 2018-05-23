@@ -6,6 +6,7 @@ falte
 fels
 fuge
 gipfel
+haardt
 hang
 horn
 horst
@@ -14,6 +15,9 @@ höhe
 höhl
 höhle
 kamm
+karst
+kau
+keil
 klamm
 kluft
 kuppe
@@ -30,6 +34,7 @@ spitze
 steig
 steil
 stein
+steinach
 steinen
 stieg
 stollen

@@ -19,5 +19,6 @@ Schollen
 Salz
 Segel
 Strudel
+Wal
 Wellen
 Wogen
