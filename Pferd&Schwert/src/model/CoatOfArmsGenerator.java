@@ -181,9 +181,11 @@ public class CoatOfArmsGenerator {
         // Schritt 3:
         // Generiere ein Wappen mit Layout passend zum Overlay
         
+        BufferedImage schildOverlay = null;
         Color overlayFarbe = null;
         switch(overlay){
         
+        // --------------- Wappen ohne Overlay ---------------
         case "einfarbig":
 
         	// Schritt 3a:
@@ -245,45 +247,125 @@ public class CoatOfArmsGenerator {
             if(wsa < 75) { anzahl = "einzeln"; }
             
             // 25% dreifach
-            else if(wsa < 80) { anzahl = "dreifach";}
+            else if(wsa < 100) { anzahl = "dreifach";}
             
             
          // Schritt 3e:
             // Symbole einfügen und einfärben
             
-            BufferedImage symbol = null;
-            System.out.println("einfarbig");
+            BufferedImage zeichen = null;
+            Color zeichenFarbe = null;
             switch(anzahl){
             
             case "einzeln":
-            	System.out.println("1");
-            	addSymbol(g, 400,78, 124, hauptFarbe, overlayFarbe, musterFarbe);
+            	
+            	zeichen = symbols[r.nextInt(symbols.length-1)];
+            	addSymbol(g, zeichen, 400,78, 124, hauptFarbe, overlayFarbe, musterFarbe, null);
             	break;
             	
             case "dreifach":
-            	System.out.println("3");
-            	addSymbol(g, 200,50, 90, hauptFarbe, overlayFarbe, musterFarbe);
-            	addSymbol(g, 200,300, 90, hauptFarbe, overlayFarbe, musterFarbe);
-            	addSymbol(g, 200, 176, 350, hauptFarbe, overlayFarbe, musterFarbe);
+            	
+            	zeichen = symbols[r.nextInt(symbols.length-1)];
+            	zeichenFarbe = addSymbol(g, zeichen, 200,50, 90, hauptFarbe, overlayFarbe, musterFarbe, null);
+            	addSymbol(g, zeichen, 200,300, 90, hauptFarbe, overlayFarbe, musterFarbe, zeichenFarbe);
+            	addSymbol(g, zeichen, 200, 176, 350, hauptFarbe, overlayFarbe, musterFarbe, zeichenFarbe);
             	break;
 	
             default:
-            	System.out.println("?");
+            	System.out.println("SYMBOL_AMOUNT_DEFAULT_CASE");
             	break;
             }
         	
         	break;
         
+        // --------------- Geteilte Wappen mit Overlay rechts ---------------
+        case "halb1":
+        	
+        	schildOverlay = shieldOverlays[0];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geteilte Wappen mit Overlay links ---------------
+        case "halb2":
+        	
+        	schildOverlay = shieldOverlays[1];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geviertelte Wappen mit Overlay oben-rechts und unten-links ---------------
+        case "viertel1":
+        	
+        	schildOverlay = shieldOverlays[2];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geviertelte Wappen mit Overlay oben-links und unten-rechts ---------------
+        case "viertel2":
+        	
+        	schildOverlay = shieldOverlays[3];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geteilte Wappen mit Overlay oben ---------------
         case "horizontal1":
         	
         	// Schritt 3a:
         	// Overlay einfügen und einfärben
-        	BufferedImage schildOverlay = shieldOverlays[4];
+        	schildOverlay = shieldOverlays[4];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geteilte Wappen mit Overlay unten ---------------
+        case "horizontal2":
+        	
+        	schildOverlay = shieldOverlays[5];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geteilte Wappen mit Overlay unten-rechts ---------------
+        case "diagonal1":
+        	
+        	schildOverlay = shieldOverlays[6];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geteilte Wappen mit Overlay unten-links ---------------
+        case "diagonal2":
+        	
+        	schildOverlay = shieldOverlays[7];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Wappen mit Overlay mit dreieckiger Aussparung oben ---------------
+        case "dreieck1":
+        	
+        	schildOverlay = shieldOverlays[8];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Wappen mit Dreiecksoverlay oben ---------------
+        case "dreieck2":
+        	
+        	schildOverlay = shieldOverlays[9];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geviertelte Wappen mit Overlay oben und unten ---------------
+        case "querviertel1":
+        	
+        	schildOverlay = shieldOverlays[10];
+        	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
+        	break;
+        	
+        // --------------- Geviertelte Wappen mit Overlay links und rechts ---------------
+        case "querviertel2":
+        	
+        	schildOverlay = shieldOverlays[11];
         	overlayFarbe = addOverlay(g, schildOverlay, hauptFarbe);
         	break;
        
         default:
-    	   
+    	   System.out.println("OVERLAY_DEFAULT_CASE");
     	   break;
         }
         
@@ -314,22 +396,24 @@ public class CoatOfArmsGenerator {
         return musterFarbe;
     }
     
- // Fügt dem Wappen ein Muster hinzu in einer Farbe, die zu Hauptfarbe und Overlayfarbe passt
-    private void addSymbol(Graphics g, int größe, int x, int y, Color hauptFarbe, Color overlayFarbe, Color musterFarbe) {
+ // Fügt dem Wappen ein Zeichen hinzu in einer Farbe, die zu Hauptfarbe, Overlayfarbe und Musterfarbe passt
+    private Color addSymbol(Graphics g, BufferedImage zeichen, int größe, int x, int y, Color hauptFarbe, Color overlayFarbe, Color musterFarbe, Color zeichenFarbe) {
     	
-    	// Zeichen auswuerfeln
-        BufferedImage zeichen = symbols[r.nextInt(symbols.length-1)];
-        Color zeichenFarbe = farben[r.nextInt(farben.length)];
-        if(zeichen != null) {
-        
-        	// Zeichen einfaerben
-        	while(zeichenFarbe.equals(hauptFarbe) || zeichenFarbe.equals(overlayFarbe) || zeichenFarbe.equals(musterFarbe)) {
+    	// Zeichenfarbe auswürfeln falls es das erste zeichen auf dem wappen ist, sonst die übergebene farbe nehmen
+    	if(zeichenFarbe == null) {
+    		zeichenFarbe = farben[r.nextInt(farben.length)];
+    		while(zeichenFarbe.equals(hauptFarbe) || zeichenFarbe.equals(overlayFarbe) || zeichenFarbe.equals(musterFarbe)) {
         		zeichenFarbe = farben[r.nextInt(farben.length)];
-        	}
-        	zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 255));
-        	g.drawImage(zeichen.getScaledInstance(größe, größe, 2), x, y, null);
-        	
+    		}
+    	}
+    	
+    	if(zeichen != null) {
+    		
+    		// Zeichen einfaerben und hinzufügen
+    		zeichen = dye(zeichen, new Color(zeichenFarbe.getRed(), zeichenFarbe.getGreen(), zeichenFarbe.getBlue(), 255));
+    		g.drawImage(zeichen.getScaledInstance(größe, größe, 2), x, y, null);	
         }
+        return zeichenFarbe;
     }
     // --------------------------------------------------------------------------------------------------------------------------------------------------
     
