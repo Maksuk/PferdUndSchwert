@@ -3,6 +3,7 @@ package controller;
 import model.NamesGenerator;
 import model.CoatOfArmsGenerator;
 
+
 public class FensterManager {
 
 	public static NamesGenerator nGenerator;

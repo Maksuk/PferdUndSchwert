@@ -15,10 +15,10 @@ public class Main {
 		CoatOfArmsGenerator c = new CoatOfArmsGenerator(path);
 		FensterManager m = new FensterManager(g,c);
 		g.arraysFuellen();
-		BufferedImage wappen = c.GenerateCoatOfArms();
+		BufferedImage wappen = c.generateCoatOfArms();
 		BufferedImage[] wappenAuswahl = new BufferedImage[9];
 		for(int i=0; i<9; i++){
-			wappenAuswahl[i] = c.GenerateCoatOfArms();
+			wappenAuswahl[i] = c.generateCoatOfArms();
 		}
 		
 		Fenster f = new Fenster(g.Vorname + " " + g.Ehrenname, g.Stadt, wappen, m);

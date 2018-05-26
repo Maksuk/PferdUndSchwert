@@ -37,12 +37,7 @@ public class ButtonListener implements ActionListener
 		  
 		  // neues Wappen
 		  imagePanel.removeAll();
-		  try {
-			imagePanel.add(new JLabel(new ImageIcon(m.cGenerator.GenerateCoatOfArms())));
-		  } 
-		  catch (IOException e) {
-			e.printStackTrace();
-		  }
+		  imagePanel.add(new JLabel(new ImageIcon(m.cGenerator.generateCoatOfArms())));
 		  imagePanel.validate();
 		  imagePanel.repaint();
 	  
