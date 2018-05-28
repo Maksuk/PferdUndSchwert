@@ -67,28 +67,28 @@ public class CoatOfArmsGenerator {
         if(ws < 40) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
-        else if(ws < 45) { overlayName = "diagonal1"; }
+        else if(ws < 40) { overlayName = "diagonal1"; }
         
         // 5% diagonal 2
-        else if(ws < 50) { overlayName = "diagonal2"; }
+        else if(ws < 40) { overlayName = "diagonal2"; }
         
         // 5% dreick 1
-        else if(ws < 55) { overlayName = "dreieck1"; }
+        else if(ws < 40) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 60) { overlayName = "dreieck2"; }
+        else if(ws < 40) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 65) { overlayName = "halb1"; }
+        else if(ws < 40) { overlayName = "halb1"; }
         
         // 5% halb 2
-        else if(ws < 70) { overlayName = "halb2"; }
+        else if(ws < 40) { overlayName = "halb2"; }
         
         // 5% horizontal 1
-        else if(ws < 75) { overlayName = "horizontal1"; }
+        else if(ws < 70) { overlayName = "horizontal1"; }
         
         // 5% horizontal 2
-        else if(ws < 80) { overlayName = "horizontal2"; }
+        else if(ws < 100) { overlayName = "horizontal2"; }
         
         // 5% quer viertel 1
         else if(ws < 85) { overlayName = "querviertel1"; }
@@ -117,7 +117,7 @@ public class CoatOfArmsGenerator {
             	// Zufallszahl zwischen 0 und 99
                 int wsp = r.nextInt(100);
                 
-                // Je nach Wahrscheinlichkeit ein Muster auswählen
+                // Je nach Wahrscheinlichkeit ein Smbollayout auswählen
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
@@ -190,8 +190,39 @@ public class CoatOfArmsGenerator {
             	overlay = shieldOverlays[4];
             	pattern = choosePattern();
             	
-            	symbolLayout = "ohne";
-            	break;
+            	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
+                symbolLayout = "ohne";
+                
+                // Zufallszahl zwischen 0 und 99
+                wsp = r.nextInt(100);
+                
+                // 2% ohne symbol
+                if(wsp < 2) { symbolLayout = "ohne"; }
+                
+                // 5%
+                else if(wsp < 7) { symbolLayout = "einfach";}
+                
+                // 20%
+                else if(wsp < 27) { symbolLayout = "einfachOben";}
+                
+                // 20%
+                else if(wsp < 47) { symbolLayout = "zweiGleichOben";}
+                
+                // 20%
+                else if(wsp < 67) { symbolLayout = "zweiGleichVert"; }
+                
+                // 20%
+                else if(wsp < 87) {
+                	symbolLayout = "zweiVerschVert";
+                	symbol2 = symbols[r.nextInt(symbols.length)];
+                }
+                
+                // 13%
+                else if(wsp < 100) {
+                	symbolLayout = "zweiInvVert";
+                	pattern = null;
+                }
+                break;
             	
             // --------------- Geteilte Wappen mit Overlay unten ---------------
             case "horizontal2":
@@ -199,7 +230,38 @@ public class CoatOfArmsGenerator {
             	overlay = shieldOverlays[5];
             	pattern = choosePattern();
             	
-            	symbolLayout = "ohne";
+            	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
+                symbolLayout = "ohne";
+                
+                // Zufallszahl zwischen 0 und 99
+                wsp = r.nextInt(100);
+                
+                // 2% ohne symbol
+                if(wsp < 2) { symbolLayout = "ohne"; }
+                
+                // 5%
+                else if(wsp < 7) { symbolLayout = "einfach";}
+                
+                // 20%
+                else if(wsp < 27) { symbolLayout = "einfachUnten";}
+                
+                // 20%
+                else if(wsp < 47) { symbolLayout = "zweiGleichUnten";}
+                
+                // 20%
+                else if(wsp < 67) { symbolLayout = "zweiGleichVert"; }
+                
+                // 20%
+                else if(wsp < 87) {
+                	symbolLayout = "zweiVerschVert";
+                	symbol2 = symbols[r.nextInt(symbols.length)];
+                }
+                
+                // 13%
+                else if(wsp < 100) {
+                	symbolLayout = "zweiInvVert2";
+                	pattern = null;
+                }
             	break;
             	
             // --------------- Geteilte Wappen mit Overlay unten-rechts ---------------
@@ -373,6 +435,14 @@ public class CoatOfArmsGenerator {
         	g.drawImage(symbol1, 78, 124, null);
         	break;
         	
+        case "einfachOben":
+        	g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	break;
+        	
+        case "einfachUnten":
+        	g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
         case "dreieck":
     		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
     		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
@@ -390,9 +460,33 @@ public class CoatOfArmsGenerator {
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
+        case "zweiGleichOben":
+        	g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
+    		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
+        	break;
+        
+        case "zweiGleichUnten":
+        	g.drawImage(symbol1.getScaledInstance(180, 180, 2), 70, 340, null);
+    		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 300, 340, null);
+        	break;
+        	
         case "zweiVerschVert":
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
     		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
+        case "zweiInvVert":
+        	symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
+    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+    		symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
+        case "zweiInvVert2":
+        	symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+    		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
+    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         
         default:
