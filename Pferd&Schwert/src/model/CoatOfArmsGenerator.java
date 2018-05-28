@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.*;
 import java.io.*;
 import java.util.Random;
@@ -10,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1"};
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
 	public Color[] farben = {new Color(250,250,250), new Color(10,10,10), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
@@ -52,7 +53,7 @@ public class CoatOfArmsGenerator {
     	
     	//Schritt 0:
     	//Erstes Symbol auswuerfeln
-    	symbol1 = symbols[r.nextInt(symbols.length)];
+    	symbol1 =symbols[r.nextInt(symbols.length)];
     	
     	// Schritt 1:
         // Auswürfeln des Overlays
@@ -121,7 +122,7 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 2) { symbolLayout = "ohne"; }
+                if(wsp < 0) { symbolLayout = "ohne"; }
                 
                 // 19%
                 else if(wsp < 21) { symbolLayout = "einfach";}
@@ -145,7 +146,7 @@ public class CoatOfArmsGenerator {
                 else if(wsp < 88) { symbolLayout = "zweiGespiegelt"; }
                 
                 // 12%
-                else if(wsp < 100) { symbolLayout = "dreiVertAlt"; }
+                else if(wsp < 0) { symbolLayout = "dreiVertAlt"; }
         		break;
         		
         	       // --------------- Geteilte Wappen mit Overlay rechts ---------------
@@ -451,40 +452,72 @@ public class CoatOfArmsGenerator {
         	
         case "dreiVert":
     		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 185, 35, null);
-    		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 185, 235, null);
+    		if(r.nextBoolean()){
+        		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 185, 235, null);
+    		} else {
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(180, 180, 2), 185, 235, null);
+    		}
     		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 185, 435, null);
         	break;
         	
         case "zweiGleichVert":
-    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(250, 250, 2), 151, 55, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	}
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
         case "zweiGleichOben":
-        	g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
-    		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(200, 200, 2), 50, 90, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
+        	}
+        	if(r.nextBoolean()){
+        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
+        	}
         	break;
         
         case "zweiGleichUnten":
-        	g.drawImage(symbol1.getScaledInstance(180, 180, 2), 70, 340, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(180, 180, 2), 70, 340, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 70, 340, null);
+        	}
     		g.drawImage(symbol1.getScaledInstance(180, 180, 2), 300, 340, null);
         	break;
         	
         case "zweiVerschVert":
-    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(250, 250, 2), 151, 55, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	}
     		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
         case "zweiInvVert":
         	symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
-    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(250, 250, 2), 151, 55, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	}
     		symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
         case "zweiInvVert2":
         	symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
-    		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(250, 250, 2), 151, 55, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
+        	}
     		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
@@ -493,7 +526,14 @@ public class CoatOfArmsGenerator {
         	break;
         }
     	
-    	return drawnCoatOfArms;
+        System.out.println("Generating: " + symbolLayout);
+        //Mit 50% Wahrscheinlichkeit das ganze Wappe spiegeln
+        if(r.nextInt(2)>0){
+        	return drawnCoatOfArms;
+        } else{
+        	return flipVertical(drawnCoatOfArms);
+        }
+
     }
     
     
@@ -513,4 +553,13 @@ public class CoatOfArmsGenerator {
         
         return dyed;
     }
+    
+    //Spiegelt ein Bild an der vertikalen Achse
+    public BufferedImage flipVertical(BufferedImage src){
+        AffineTransform tx=AffineTransform.getScaleInstance(-1.0,1.0);  //scaling
+        tx.translate(-src.getWidth(),0);  //translating
+        AffineTransformOp tr=new AffineTransformOp(tx,null);  //transforming
+        
+        return tr.filter(src, null);  //filtering
+       }
 }
