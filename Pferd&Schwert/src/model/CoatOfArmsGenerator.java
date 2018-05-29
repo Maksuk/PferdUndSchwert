@@ -12,8 +12,8 @@ public class CoatOfArmsGenerator {
 	public Random r = new Random();
 	public String path;
 	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1"};
-	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2"};
-	public String[] patternNames = {"StreifenVertikal", "StreifenHorizontal"};
+	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
+	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal"};
 	public Color[] farben = {new Color(250,250,250), new Color(10,10,10), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
 							 new Color(100,100,255), new Color(0,80,0), new Color(100,100,100), new Color(90,10,90), new Color(200,100,0), new Color(10,90,90), new Color(0,0,80)};
 	public BufferedImage[] symbols = new BufferedImage[symbolNames.length];
@@ -64,44 +64,47 @@ public class CoatOfArmsGenerator {
         // Je nach Wahrscheinlichkeit ein Overlay auswählen
         String overlayName = "einfarbig";
         
-        // 40% einfarbig
-        if(ws < 40) { overlayName = "einfarbig"; }
+        // 35% einfarbig
+        if(ws < 35) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
         else if(ws < 40) { overlayName = "diagonal1"; }
         
         // 5% diagonal 2
-        else if(ws < 40) { overlayName = "diagonal2"; }
+        else if(ws < 45) { overlayName = "diagonal2"; }
         
         // 5% dreick 1
-        else if(ws < 40) { overlayName = "dreieck1"; }
+        else if(ws < 50) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 40) { overlayName = "dreieck2"; }
+        else if(ws < 55) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 40) { overlayName = "halb1"; }
+        else if(ws < 60) { overlayName = "halb1"; }
         
         // 5% halb 2
-        else if(ws < 40) { overlayName = "halb2"; }
+        else if(ws < 65) { overlayName = "halb2"; }
         
         // 5% horizontal 1
         else if(ws < 70) { overlayName = "horizontal1"; }
         
         // 5% horizontal 2
-        else if(ws < 100) { overlayName = "horizontal2"; }
+        else if(ws < 75) { overlayName = "horizontal2"; }
         
         // 5% quer viertel 1
-        else if(ws < 85) { overlayName = "querviertel1"; }
+        else if(ws < 80) { overlayName = "querviertel1"; }
         
         // 5% quer viertel 2
-        else if(ws < 90) { overlayName = "querviertel2"; }
+        else if(ws < 85) { overlayName = "querviertel2"; }
         
         // 5% viertel 1
-        else if(ws < 95) { overlayName = "viertel1"; }
+        else if(ws < 90) { overlayName = "viertel1"; }
         
         // 5% viertel 2
-        else if(ws < 100) { overlayName = "viertel2"; }
+        else if(ws < 95) { overlayName = "viertel2"; }
+        
+        // 5% viertel 2
+        else if(ws < 100) { overlayName = "einzelstreifenVertikal"; }
         
         switch(overlayName) {
         
@@ -111,7 +114,7 @@ public class CoatOfArmsGenerator {
             	overlay = null;
             	
             	//Muster
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, true);
             	
             	//Symbol
             	
@@ -153,7 +156,7 @@ public class CoatOfArmsGenerator {
             case "halb1":
             	
             	overlay = shieldOverlays[0];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, false);
             	
             	symbolLayout = "ohne";
             	break;
@@ -162,7 +165,7 @@ public class CoatOfArmsGenerator {
             case "halb2":
             	
             	overlay = shieldOverlays[1];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, false);
             	
             	symbolLayout = "ohne";
             	break;
@@ -171,7 +174,7 @@ public class CoatOfArmsGenerator {
             case "viertel1":
             	
             	overlay = shieldOverlays[2];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, false);
             	
             	symbolLayout = "ohne";
             	break;
@@ -180,7 +183,7 @@ public class CoatOfArmsGenerator {
             case "viertel2":
             	
             	overlay = shieldOverlays[3];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, false);
             	
             	symbolLayout = "ohne";
             	break;
@@ -189,7 +192,7 @@ public class CoatOfArmsGenerator {
             case "horizontal1":
             	
             	overlay = shieldOverlays[4];
-            	pattern = choosePattern();
+            	pattern = choosePattern(40, true);
             	
             	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
                 symbolLayout = "ohne";
@@ -229,7 +232,7 @@ public class CoatOfArmsGenerator {
             case "horizontal2":
             	
             	overlay = shieldOverlays[5];
-            	pattern = choosePattern();
+            	pattern = choosePattern(40, true);
             	
             	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
                 symbolLayout = "ohne";
@@ -269,7 +272,7 @@ public class CoatOfArmsGenerator {
             case "diagonal1":
             	
             	overlay = shieldOverlays[6];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, true);
             	
             	symbolLayout = "ohne";
             	break;
@@ -278,7 +281,7 @@ public class CoatOfArmsGenerator {
             case "diagonal2":
             	
             	overlay = shieldOverlays[7];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, true);
             	
             	symbolLayout = "ohne";
             	break;
@@ -287,7 +290,7 @@ public class CoatOfArmsGenerator {
             case "dreieck1":
             	
             	overlay = shieldOverlays[8];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, true);
             	
             	symbolLayout = "ohne";
             	break;
@@ -296,7 +299,7 @@ public class CoatOfArmsGenerator {
             case "dreieck2":
             	
             	overlay = shieldOverlays[9];
-            	pattern = choosePattern();
+            	pattern = choosePattern(60, true);
             	
             	symbolLayout = "ohne";
 
@@ -306,7 +309,7 @@ public class CoatOfArmsGenerator {
             case "querviertel1":
             	
             	overlay = shieldOverlays[10];
-            	pattern = choosePattern();
+            	pattern = choosePattern(100, true);
             	
             	symbolLayout = "ohne";
             	break;
@@ -315,10 +318,19 @@ public class CoatOfArmsGenerator {
             case "querviertel2":
             	
             	overlay = shieldOverlays[11];
-            	pattern = choosePattern();
+            	pattern = choosePattern(100, true);
             	
             	symbolLayout = "ohne";
             	break;
+            	
+            // --------------- Geviertelte Wappen mit Overlay links und rechts ---------------
+            case "einzelstreifenVertikal":
+                	
+              overlay = shieldOverlays[12];
+              pattern = choosePattern(60,true);
+                	
+              symbolLayout = "ohne";
+              break;
            
             default:
         	   System.out.println("OVERLAY_DEFAULT_CASE");
@@ -331,7 +343,7 @@ public class CoatOfArmsGenerator {
     	return coatOfArms;
     }
     
-    private BufferedImage choosePattern(){
+    private BufferedImage choosePattern(int wspBlanc, boolean symetric){
     	
     	// Schritt 1:
     	// Auswürfeln des Musters
@@ -342,14 +354,23 @@ public class CoatOfArmsGenerator {
         // Je nach Wahrscheinlichkeit ein Muster auswählen
         String muster = "ohne";
         
+        int wspRest =  (100 - wspBlanc)/2;
+        
         // 60% ohne muster
-        if(wsp < 60) { muster = "ohne"; }
+        if(wsp < wspBlanc) { muster = "ohne"; }
         
         // 20% streifen 1
-        else if(wsp < 80) { muster = "streifen1";}
+        else if(wsp < wspBlanc + wspRest) { 
+        	
+            if(symetric){
+            	muster = "streifenVert1";
+            } else{
+            	muster = "streifenVert2";
+            }
+        									}
         
         // 20% streifen 2
-        else if(wsp < 100) { muster = "streifen2"; }
+        else if(wsp < 100) { muster = "streifen1"; }
         
         
         // Schritt 2:
@@ -361,12 +382,16 @@ public class CoatOfArmsGenerator {
         case "ohne":
         	break;
         	
-        case "streifen1":
+        case "streifenVert1":
         	shieldPattern = patterns[0];
         	break;
         	
-        case "streifen2":
+        case "streifenVert2":
         	shieldPattern = patterns[1];
+        	break;
+        	
+        case "streifen1":
+        	shieldPattern = patterns[2];
         	break;
         	
         default:
