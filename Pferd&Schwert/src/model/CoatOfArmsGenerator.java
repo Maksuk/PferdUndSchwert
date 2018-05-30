@@ -14,8 +14,21 @@ public class CoatOfArmsGenerator {
 	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal"};
-	public Color[] farben = {new Color(250,250,250), new Color(10,10,10), new Color(160,0,0), new Color(30,150,30), new Color(0,0,160), new Color(200,200,0), new Color(90,0,0), 
-							 new Color(100,100,255), new Color(0,80,0), new Color(100,100,100), new Color(90,10,90), new Color(200,100,0), new Color(10,90,90), new Color(0,0,80), new Color(198,35,138)};
+	public Color[] farben = {new Color(250,250,250),//Weiß
+							new Color(10,10,10),//Schwarz
+							new Color(160,0,0),//Rot
+							new Color(30,150,30),//Hellgrün
+							new Color(0,0,160),//Dunkelblau
+							new Color(200,200,0),//Gelb
+							new Color(90,0,0), //Dunkelrot
+							new Color(100,100,255),//Hellblau
+							new Color(0,80,0),//Dunkelgrün
+							new Color(100,100,100),//Grau
+							new Color(90,10,90),//Lila
+							new Color(200,100,0),//Orange
+							new Color(10,90,90),//Türkis
+							new Color(0,0,80),//Dunkelblau
+							new Color(183,51,135)};//Magenta
 	public BufferedImage[] symbols = new BufferedImage[symbolNames.length];
 	public BufferedImage[] shieldOverlays = new BufferedImage[overlayNames.length+1];
 	public BufferedImage[] patterns = new BufferedImage[patternNames.length];
@@ -551,11 +564,13 @@ public class CoatOfArmsGenerator {
         	break;
         }
     	
-        System.out.println("Generating: " + symbolLayout);
+        //System.out.println("Generating: " + symbolLayout);
         //Mit 50% Wahrscheinlichkeit das ganze Wappe spiegeln
         if(r.nextInt(2)>0){
+    		g.drawImage(shieldshadow, 0, 0, null);
         	return drawnCoatOfArms;
         } else{
+       		g.drawImage(flipVertical(shieldshadow), 0, 0, null);
         	return flipVertical(drawnCoatOfArms);
         }
 

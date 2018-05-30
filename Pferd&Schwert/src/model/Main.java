@@ -15,6 +15,7 @@ public class Main {
 		CoatOfArmsGenerator c = new CoatOfArmsGenerator(path);
 		FensterManager m = new FensterManager(g,c);
 		g.arraysFuellen();
+		WortGenerator wg = new WortGenerator();
 		BufferedImage wappen = c.generateCoatOfArms();
 		BufferedImage[] wappenAuswahl = new BufferedImage[9];
 		for(int i=0; i<9; i++){
