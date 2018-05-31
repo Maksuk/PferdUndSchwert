@@ -11,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1"};
+	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal"};
 	public Color[] farben = {new Color(250,250,250),//Weiß

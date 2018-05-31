@@ -7,7 +7,7 @@ public class WortGenerator {
 	private String[] vowelsRare = {"ai", "ä", "eu", "ia", "ö", "ua", "ü"};
 	private String[] vowelsVeryRare = {"aa", "ay", "ea", "ee", "oa", "oi", "oo", "ui", "uu"};
 	private String[] consonantsCommon = {"b", "d", "f", "g", "h", "j", "l", "m", "n", "p", "r", "s", "t", "v", "w", "z"};
-	private String[] consonantsRare = {"c", "ck", "ch", "dr", "dl", "dw", "ff", "fl", "fr", "ll", "mm", "ng", "nn", "nk", "nl", "qu", "rr", "sk", "sp", "ss", "st", "x", "y"};
+	private String[] consonantsRare = {"c", "ck", "ch", "dr", "dl", "dw", "ff", "fl", "fr", "k", "kl", "kr", "kw", "ll", "mm", "nd", "ng", "nn", "nk", "nl", "nt", "rl", "qu", "rr", "rs", "rt", "sk", "sp", "ss", "st", "x", "y"};
 	private String[] startConsonants = {"B", "Bl", "Br", "Ch", "D", "Dr", "Dw", "F", "Fl", "Fr", "G", "Gl", "Gr", "Gw", "H", "Hj", "J", "K", "Kl", "Kr", "Kw", "L", "M", "N", "P", "Pl", "Pr", "Pw", "R", "S", "Sk", "Sp", "St", "T", "Tr", "Tw", "V", "W", "Z"};
 
 	Random r = new Random();
