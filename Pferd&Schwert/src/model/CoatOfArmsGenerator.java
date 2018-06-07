@@ -11,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1"};
+	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
@@ -93,7 +93,7 @@ public class CoatOfArmsGenerator {
         else if(ws < 0) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 0) { overlayName = "halb1"; }
+        else if(ws < 60) { overlayName = "halb1"; }
         
         // 5% halb 2
         else if(ws < 0) { overlayName = "halb2"; }
@@ -162,16 +162,40 @@ public class CoatOfArmsGenerator {
                 else if(wsp < 88) { symbolLayout = "zweiGespiegelt"; }
                 
                 // 12%
-                else if(wsp < 0) { symbolLayout = "dreiVertAlt"; }
+                else if(wsp < 100) { symbolLayout = "dreiVertAlt"; }
         		break;
         		
         	       // --------------- Geteilte Wappen mit Overlay rechts ---------------
             case "halb1":
-            	
+            	      		
             	overlay = shieldOverlays[0];
-            	pattern = choosePattern(60, false, false);
             	
-            	symbolLayout = "ohne";
+            	//Muster
+            	pattern = choosePattern(100, false, false);
+            	
+            	//Symbol
+            	
+            	// Zufallszahl zwischen 0 und 99
+                wsp = r.nextInt(100);
+                
+                // Je nach Wahrscheinlichkeit ein Smbollayout auswählen
+                symbolLayout = "ohne";
+                
+                // 2% ohne symbol
+                if(wsp < 2) { symbolLayout = "ohne"; }
+                
+                // 19%
+                else if(wsp < 32) { symbolLayout = "einfach";}
+                
+                // 12%
+                else if(wsp < 34) { symbolLayout = "zweiGespiegelt"; }
+                
+                
+                // 12%
+                else if(wsp < 100) { symbolLayout = "einzelnRechts"; 
+            	pattern = choosePattern(10, false, false);
+            	}
+
             	break;
             	
             // --------------- Geteilte Wappen mit Overlay links ---------------
@@ -394,7 +418,10 @@ public class CoatOfArmsGenerator {
         int wspRest =  (100 - wspBlanc)/3;
         
         // 60% ohne muster
-        if(wsp < wspBlanc) { muster = "ohne"; }
+        if(wsp < wspBlanc) { 
+        	muster = "ohne";
+        	pattern =null;
+        	}
         
         // 15% streifen 1
         else if(wsp < wspBlanc + wspRest) { 
@@ -560,7 +587,7 @@ public class CoatOfArmsGenerator {
         		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
         	}
         	if(r.nextBoolean()){
-        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(200, 200, 2), 300, 90, null);
         	} else {
         		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 300, 90, null);
         	}
@@ -605,6 +632,24 @@ public class CoatOfArmsGenerator {
     		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
+        	
+        case "zweiGespiegelt":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 286, 190, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 286, 190, null);
+        	}
+        	break;
+        	
+        case "einzelnRechts":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        	}
+        	break;
         
         default:
         	break;
@@ -612,7 +657,7 @@ public class CoatOfArmsGenerator {
     	
         //System.out.println("Generating: " + symbolLayout);
         //Mit 50% Wahrscheinlichkeit das ganze Wappe spiegeln
-        if(r.nextInt(2)>0){
+        if(r.nextBoolean()){
     		g.drawImage(shieldshadow, 0, 0, null);
         	return drawnCoatOfArms;
         } else{
