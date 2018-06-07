@@ -90,10 +90,10 @@ public class CoatOfArmsGenerator {
         else if(ws < 0) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 0) { overlayName = "dreieck2"; }
+        else if(ws < 60) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 60) { overlayName = "halb1"; }
+        else if(ws < 70) { overlayName = "halb1"; }
         
         // 5% halb 2
         else if(ws < 0) { overlayName = "halb2"; }
@@ -184,14 +184,19 @@ public class CoatOfArmsGenerator {
                 // 2% ohne symbol
                 if(wsp < 2) { symbolLayout = "ohne"; }
                 
-                // 19%
-                else if(wsp < 32) { symbolLayout = "einfach";}
+                // 23%
+                else if(wsp < 25) { symbolLayout = "einfach";}
                 
-                // 12%
-                else if(wsp < 34) { symbolLayout = "zweiGespiegelt"; }
+                // 25%
+                else if(wsp < 50) { symbolLayout = "zweiGespiegelt"; }
                 
+                // 25%
+                else if(wsp < 75) { symbolLayout = "zweiVerschHor"; 
+            	pattern = choosePattern(100, false, false);
+            	symbol2 = symbols[r.nextInt(symbols.length)];
+            	}
                 
-                // 12%
+                // 25%
                 else if(wsp < 100) { symbolLayout = "einzelnRechts"; 
             	pattern = choosePattern(10, false, false);
             	}
@@ -250,12 +255,16 @@ public class CoatOfArmsGenerator {
                 else if(wsp < 47) { symbolLayout = "zweiGleichOben";}
                 
                 // 20%
-                else if(wsp < 67) { symbolLayout = "zweiGleichVert"; }
+                else if(wsp < 67) {
+                	symbolLayout = "zweiGleichVert"; 
+                	pattern = choosePattern(90, true, true);
+                }
                 
                 // 20%
                 else if(wsp < 87) {
                 	symbolLayout = "zweiVerschVert";
                 	symbol2 = symbols[r.nextInt(symbols.length)];
+                	pattern = choosePattern(90, true, true);
                 }
                 
                 // 13%
@@ -290,12 +299,16 @@ public class CoatOfArmsGenerator {
                 else if(wsp < 47) { symbolLayout = "zweiGleichUnten";}
                 
                 // 20%
-                else if(wsp < 67) { symbolLayout = "zweiGleichVert"; }
+                else if(wsp < 67) { 
+                	symbolLayout = "zweiGleichVert";
+                	pattern = choosePattern(90, true, true);
+                }
                 
                 // 20%
                 else if(wsp < 87) {
                 	symbolLayout = "zweiVerschVert";
                 	symbol2 = symbols[r.nextInt(symbols.length)];
+                	pattern = choosePattern(90, true, true);
                 }
                 
                 // 13%
@@ -336,10 +349,34 @@ public class CoatOfArmsGenerator {
             case "dreieck2":
             	
             	overlay = shieldOverlays[9];
-            	pattern = choosePattern(60, true, false);
+            	pattern = choosePattern(20, true, false);
             	
-            	symbolLayout = "ohne";
-
+            	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
+                symbolLayout = "ohne";
+                
+                // Zufallszahl zwischen 0 und 99
+                wsp = r.nextInt(100);
+                
+                // 2% ohne symbol
+                if(wsp < 2) { symbolLayout = "ohne"; }
+                
+                // 0%
+                else if(wsp < 35) { symbolLayout = "einfachGanzOben";}
+                
+                // 0%
+                else if(wsp < 66) { 
+                	symbolLayout = "einfachUnten";
+                	pattern = choosePattern(100, true, false);
+                }
+                
+                // 0%
+                else if(wsp < 100) { 
+                	symbolLayout = "zweiVerschVertFürDreieck";
+                	symbol2 = symbols[r.nextInt(symbols.length)];
+                	pattern = choosePattern(100, true, false);
+                }
+                
+            	
             	break;
             	
             // --------------- Geviertelte Wappen mit Overlay oben und unten ---------------
@@ -551,6 +588,10 @@ public class CoatOfArmsGenerator {
         	g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
         	break;
         	
+        case "einfachGanzOben":
+        	g.drawImage(symbol1.getScaledInstance(200, 200, 2), 176, 30, null);
+        	break;
+        	
         case "einfachUnten":
         	g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
@@ -611,6 +652,15 @@ public class CoatOfArmsGenerator {
     		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
+        case "zweiVerschVertFürDreieck":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(200, 200, 2), 176, 30, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 176, 30, null);
+        	}
+    		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
         case "zweiInvVert":
         	symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
         	if(r.nextBoolean()){
@@ -631,6 +681,15 @@ public class CoatOfArmsGenerator {
         	}
     		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
+        case "zweiVerschHor":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        	}
+    		g.drawImage(symbol2.getScaledInstance(230, 230, 2), 286, 190, null);
         	break;
         	
         case "zweiGespiegelt":
