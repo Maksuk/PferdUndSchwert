@@ -11,8 +11,8 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3"};
-	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
+	public String[] symbolNames = {"Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2"};
+	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
 							new Color(10,10,10),//Schwarz
@@ -78,7 +78,7 @@ public class CoatOfArmsGenerator {
         String overlayName = "einfarbig";
         
         // 35% einfarbig
-        if(ws < 25) { overlayName = "einfarbig"; }
+        if(ws < 15) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
         else if(ws < 0) { overlayName = "diagonal1"; }
@@ -90,19 +90,19 @@ public class CoatOfArmsGenerator {
         else if(ws < 0) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 40) { overlayName = "dreieck2"; }
+        else if(ws < 30) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 55) { overlayName = "halb1"; }
+        else if(ws < 45) { overlayName = "halb1"; }
         
         // 5% halb 2
-        else if(ws < 0) { overlayName = "halb2"; }
+        else if(ws < 60) { overlayName = "einzelviertel"; }
         
         // 5% horizontal 1
-        else if(ws < 70) { overlayName = "horizontal1"; }
+        else if(ws < 75) { overlayName = "horizontal1"; }
         
         // 5% horizontal 2
-        else if(ws < 85) { overlayName = "horizontal2"; }
+        else if(ws < 90) { overlayName = "horizontal2"; }
         
         // 5% quer viertel 1
         else if(ws < 0) { overlayName = "querviertel1"; }
@@ -204,12 +204,12 @@ public class CoatOfArmsGenerator {
             	break;
             	
             // --------------- Geteilte Wappen mit Overlay links ---------------
-            case "halb2":
+            case "einzelviertel":
             	
             	overlay = shieldOverlays[1];
-            	pattern = choosePattern(60, false, false);
+            	pattern = choosePattern(0, false, false);
             	
-            	symbolLayout = "ohne";
+            	symbolLayout = "einzelnObenLinks";
             	break;
             	
             // --------------- Geviertelte Wappen mit Overlay oben-rechts und unten-links ---------------
@@ -720,6 +720,20 @@ public class CoatOfArmsGenerator {
         		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
         		symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
         		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 286, 190, null);
+        	}
+        	break;
+        	
+        case "einzelnObenLinks":
+        	if(r.nextBoolean()){
+        		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
+        	} else {
+        		symbol1 = dye(symbol1, new Color(drawnColors[1].getRed(), drawnColors[1].getGreen(), drawnColors[1].getBlue(), 255));
+        	}
+
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(200, 200, 2), 50, 90, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(200, 200, 2), 50, 90, null);
         	}
         	break;
         
