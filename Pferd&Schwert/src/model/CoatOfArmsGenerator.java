@@ -11,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1"};
+	public String[] symbolNames = { "Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3"};
 	public String[] overlayNames = {"Halb", "Halb2", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
@@ -78,7 +78,7 @@ public class CoatOfArmsGenerator {
         String overlayName = "einfarbig";
         
         // 35% einfarbig
-        if(ws < 35) { overlayName = "einfarbig"; }
+        if(ws < 25) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
         else if(ws < 0) { overlayName = "diagonal1"; }
@@ -90,19 +90,19 @@ public class CoatOfArmsGenerator {
         else if(ws < 0) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 60) { overlayName = "dreieck2"; }
+        else if(ws < 40) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 70) { overlayName = "halb1"; }
+        else if(ws < 55) { overlayName = "halb1"; }
         
         // 5% halb 2
         else if(ws < 0) { overlayName = "halb2"; }
         
         // 5% horizontal 1
-        else if(ws < 80) { overlayName = "horizontal1"; }
+        else if(ws < 70) { overlayName = "horizontal1"; }
         
         // 5% horizontal 2
-        else if(ws < 90) { overlayName = "horizontal2"; }
+        else if(ws < 85) { overlayName = "horizontal2"; }
         
         // 5% quer viertel 1
         else if(ws < 0) { overlayName = "querviertel1"; }
@@ -138,31 +138,28 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 0) { symbolLayout = "ohne"; }
+                if(wsp < 2) { symbolLayout = "ohne"; }
                 
                 // 19%
-                else if(wsp < 21) { symbolLayout = "einfach";}
+                else if(wsp < 23) { symbolLayout = "einfach";}
                 
                 // 19%
-                else if(wsp < 40) { symbolLayout = "dreieck"; }
+                else if(wsp < 44) { symbolLayout = "dreieck"; }
                 
                 // 12%
-                else if(wsp < 52) { symbolLayout = "dreiVert"; }
+                else if(wsp < 58) { symbolLayout = "dreiVert"; }
                 
                 // 12%
-                else if(wsp < 64) { symbolLayout = "zweiGleichVert"; }
+                else if(wsp < 72) { symbolLayout = "zweiGleichVert"; }
                 
                 // 12%
-                else if(wsp < 76) {
+                else if(wsp < 86) {
                 	symbolLayout = "zweiVerschVert";
                 	symbol2 = symbols[r.nextInt(symbols.length)];
                 }
                 
                 // 12%
-                else if(wsp < 88) { symbolLayout = "zweiGespiegelt"; }
-                
-                // 12%
-                else if(wsp < 100) { symbolLayout = "dreiVertAlt"; }
+                else if(wsp < 100) { symbolLayout = "zweiGespiegelt"; }         
         		break;
         		
         	       // --------------- Geteilte Wappen mit Overlay rechts ---------------
@@ -182,13 +179,16 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 2) { symbolLayout = "ohne"; }
+                if(wsp < 0) { symbolLayout = "ohne"; }
                 
                 // 23%
-                else if(wsp < 25) { symbolLayout = "einfach";}
+                else if(wsp < 0) { symbolLayout = "einfach";}
                 
                 // 25%
-                else if(wsp < 50) { symbolLayout = "zweiGespiegelt"; }
+                else if(wsp < 0) { symbolLayout = "zweiGespiegelt"; }
+                
+                // 25%
+                else if(wsp < 100) { symbolLayout = "zweiInversHor"; }
                 
                 // 25%
                 else if(wsp < 75) { symbolLayout = "zweiVerschHor"; 
@@ -360,11 +360,14 @@ public class CoatOfArmsGenerator {
                 // 2% ohne symbol
                 if(wsp < 2) { symbolLayout = "ohne"; }
                 
-                // 0%
-                else if(wsp < 35) { symbolLayout = "einfachGanzOben";}
+                // 23%
+                else if(wsp < 26) { symbolLayout = "einfach";}
                 
                 // 0%
-                else if(wsp < 66) { 
+                else if(wsp < 51) { symbolLayout = "einfachGanzOben";}
+                
+                // 0%
+                else if(wsp < 75) { 
                 	symbolLayout = "einfachUnten";
                 	pattern = choosePattern(100, true, false);
                 }
@@ -414,21 +417,17 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 0) { symbolLayout = "ohne"; }
+                if(wsp < 2) { symbolLayout = "ohne"; }
                 
                 // 19%
-                else if(wsp < 21) { symbolLayout = "einfach";}
+                else if(wsp < 32) { symbolLayout = "einfach";}
                 
                 // 19%
-                else if(wsp < 40) { symbolLayout = "dreieck"; }
+                else if(wsp < 66) { symbolLayout = "dreieck"; }
                 
                 // 12%
-                else if(wsp < 52) { symbolLayout = "dreiVert"; }
-                
-                // 12%
-                else if(wsp < 100) { symbolLayout = "dreiVertAlt"; }
-        		break;
-        		
+                else if(wsp < 100) { symbolLayout = "dreiVert"; }
+         	   break;
            
             default:
         	   System.out.println("OVERLAY_DEFAULT_CASE");
@@ -542,7 +541,7 @@ public class CoatOfArmsGenerator {
     		drawnColors[2] = farben[r.nextInt(farben.length)];
     	}
     	
-    	// viete Farbe
+    	// vierte Farbe
     	drawnColors[3] = farben[r.nextInt(farben.length)];
     	while(drawnColors[3] == drawnColors[0] || drawnColors[3] == drawnColors[1] || drawnColors[3] == drawnColors[2]) {
     		drawnColors[3] = farben[r.nextInt(farben.length)];
@@ -707,6 +706,20 @@ public class CoatOfArmsGenerator {
         		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
         	} else {
         		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        	}
+        	break;
+        	
+        case "zweiInversHor":
+        	if(r.nextBoolean()){
+        		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
+        		symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 286, 190, null);
+        	} else {
+        		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        		symbol1 = dye(symbol1, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 286, 190, null);
         	}
         	break;
         
