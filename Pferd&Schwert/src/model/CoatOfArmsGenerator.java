@@ -11,9 +11,9 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2"};
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1"};
 	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
-	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3"};
+	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3", "StreifenDiagonal", "Streifendachform", "StreifenVForm"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
 							new Color(10,10,10),//Schwarz
 							new Color(160,0,0),//Rot
@@ -179,19 +179,19 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 0) { symbolLayout = "ohne"; }
+                if(wsp < 5) { symbolLayout = "ohne"; }
                 
                 // 23%
-                else if(wsp < 0) { symbolLayout = "einfach";}
+                else if(wsp < 24) { symbolLayout = "einfach";}
                 
                 // 25%
-                else if(wsp < 0) { symbolLayout = "zweiGespiegelt"; }
+                else if(wsp < 43) { symbolLayout = "zweiGespiegelt"; }
                 
                 // 25%
-                else if(wsp < 100) { symbolLayout = "zweiInversHor"; }
+                else if(wsp < 62) { symbolLayout = "zweiInversHor"; }
                 
                 // 25%
-                else if(wsp < 75) { symbolLayout = "zweiVerschHor"; 
+                else if(wsp < 81) { symbolLayout = "zweiVerschHor"; 
             	pattern = choosePattern(100, false, false);
             	symbol2 = symbols[r.nextInt(symbols.length)];
             	}
@@ -451,7 +451,7 @@ public class CoatOfArmsGenerator {
         // Je nach Wahrscheinlichkeit ein Muster auswählen
         String muster = "ohne";
         
-        int wspRest =  (100 - wspBlanc)/3;
+        int wspRest =  (100 - wspBlanc)/5;
         
         // 60% ohne muster
         if(wsp < wspBlanc) { 
@@ -471,6 +471,18 @@ public class CoatOfArmsGenerator {
         
         // 15% streifen 2
         else if(wsp < wspBlanc + 2*wspRest) { muster = "streifen1"; }
+        
+        // 15% streifenDiagonal
+        else if(wsp < wspBlanc + 2*wspRest + wspRest/2) { muster = "streifenDiagonalFlip"; }
+        
+        // 15% streifenDiagonal
+        else if(wsp < wspBlanc + 3*wspRest) { muster = "streifenDiagonal"; }
+        
+        // 15% streifenVform
+        else if(wsp < 3*wspRest + wspRest/2) { muster = "streifenVForm"; }
+        
+        // 15% streifenDachform
+        else if(wsp < wspBlanc + 4*wspRest) { muster = "streifenDachform"; }
         
         // 10% schachbrettmuster
         else if(wsp < 100) {
@@ -514,6 +526,22 @@ public class CoatOfArmsGenerator {
         	
         case "schachbrett3":
         	shieldPattern = patterns[5];
+        	break;
+        	
+        case "streifenDiagonal":
+        	shieldPattern = patterns[6];
+        	break;
+        	
+        case "streifenDiagonalFlip":
+        	shieldPattern = flipVertical(patterns[6]);
+        	break;
+        	
+        case "streifenDachform":
+        	shieldPattern = patterns[7];
+        	break;
+        	
+        case "streifenVForm":
+        	shieldPattern = patterns[8];
         	break;
         	
         default:
