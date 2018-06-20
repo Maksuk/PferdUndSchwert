@@ -12,7 +12,7 @@ public class CoatOfArmsGenerator {
 	public Random r = new Random();
 	public String path;
 	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1", "Fuchs1", "Bogen1", "Schnecke1", "Schwalbe1", "Eichenblatt1", "Ahornblatt1", "Buchenblatt1"};
-	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal"};
+	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal", "EinzelstreifenHorizontal"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3", "StreifenDiagonal", "Streifendachform", "StreifenVForm"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
 							new Color(10,10,10),//Schwarz
@@ -78,7 +78,7 @@ public class CoatOfArmsGenerator {
         String overlayName = "einfarbig";
         
         // 35% einfarbig
-        if(ws < 15) { overlayName = "einfarbig"; }
+        if(ws < 14) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
         else if(ws < 0) { overlayName = "diagonal1"; }
@@ -90,19 +90,19 @@ public class CoatOfArmsGenerator {
         else if(ws < 0) { overlayName = "dreieck1"; }
         
         // 5% dreick 2
-        else if(ws < 30) { overlayName = "dreieck2"; }
+        else if(ws < 26) { overlayName = "dreieck2"; }
         
         // 5% halb 1
-        else if(ws < 45) { overlayName = "halb1"; }
+        else if(ws < 38) { overlayName = "halb1"; }
         
         // 5% halb 2
-        else if(ws < 60) { overlayName = "einzelviertel"; }
+        else if(ws < 50) { overlayName = "einzelviertel"; }
         
         // 5% horizontal 1
-        else if(ws < 75) { overlayName = "horizontal1"; }
+        else if(ws < 62) { overlayName = "horizontal1"; }
         
         // 5% horizontal 2
-        else if(ws < 90) { overlayName = "horizontal2"; }
+        else if(ws < 74) { overlayName = "horizontal2"; }
         
         // 5% quer viertel 1
         else if(ws < 0) { overlayName = "querviertel1"; }
@@ -116,8 +116,11 @@ public class CoatOfArmsGenerator {
         // 5% viertel 2
         else if(ws < 0) { overlayName = "viertel2"; }
         
-        // 5% viertel 2
-        else if(ws < 100) { overlayName = "einzelstreifenVertikal"; }
+        // 5% einzelstreifenVertikal
+        else if(ws < 86) { overlayName = "einzelstreifenVertikal"; }
+        
+        // 5% einzelstreifenHorizontal
+        else if(ws < 100) { overlayName = "einzelstreifenHorizontal"; }
         
         switch(overlayName) {
         
@@ -433,6 +436,41 @@ public class CoatOfArmsGenerator {
         	   System.out.println("OVERLAY_DEFAULT_CASE");
         	   symbolLayout = "ohne";
         	   break;
+        	   
+        	case "einzelstreifenHorizontal":
+        		
+            	overlay = shieldOverlays[13];
+            	
+            	//Muster
+            	pattern = choosePattern(60, true, false);
+            	
+            	//Symbol
+            	
+            	// Zufallszahl zwischen 0 und 99
+                wsp = r.nextInt(100);
+                
+                // Je nach Wahrscheinlichkeit ein Smbollayout auswählen
+                symbolLayout = "ohne";
+                
+                // 2% ohne symbol
+                if(wsp < 2) { symbolLayout = "ohne"; }
+                
+                // 19%
+                else if(wsp < 23) { symbolLayout = "einfach";}
+                
+                
+                // 12%
+                else if(wsp < 40) { symbolLayout = "zweiGespiegeltfürEH"; }         
+        		
+                // 12%
+                else if(wsp < 70) { 
+                	symbolLayout = "dreieckfürEH";
+            		pattern = null;
+                					}  
+                
+                // 12%
+                else if(wsp < 100) { symbolLayout = "einfachfürEH"; }  
+        		break;
             }
         pickColors();
         BufferedImage coatOfArms = drawCoatOfArms(pattern, overlay, symbol1, symbol2, symbolLayout, drawnColors);
@@ -708,6 +746,30 @@ public class CoatOfArmsGenerator {
         	}
     		symbol1 = dye(symbol1, new Color(drawnColors[0].getRed(), drawnColors[0].getGreen(), drawnColors[0].getBlue(), 255));
     		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 345, null);
+        	break;
+        	
+        case "dreieckfürEH":
+        		g.drawImage(symbol1.getScaledInstance(165, 165, 2), 85, 30, null);
+        		g.drawImage(symbol1.getScaledInstance(165, 165, 2), 307, 30, null);
+        		g.drawImage(symbol1.getScaledInstance(165, 165, 2), 196, 450, null);
+        	break;
+        	
+        case "einfachfürEH":
+        	if(r.nextBoolean()){
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 160, 205, null);
+        	} else {
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 160, 205, null);
+        	}
+        	break;
+        	
+        case "zweiGespiegeltfürEH":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 205, null);
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 286, 205, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 205, null);
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 286, 205, null);
+        	}
         	break;
         	
         case "zweiVerschHor":
