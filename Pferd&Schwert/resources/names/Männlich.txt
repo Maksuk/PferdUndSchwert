@@ -8,6 +8,7 @@ bar
 bart
 bel
 bern
+bert
 brand
 dall
 dam
@@ -20,6 +21,8 @@ fried
 gar
 gard
 ger
+go
+goll
 gon
 gor
 gorn

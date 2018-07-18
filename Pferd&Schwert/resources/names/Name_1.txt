@@ -34,6 +34,7 @@ Fae
 Fried
 Gab
 Ger
+Gor
 Gri
 Grim
 Guldu
@@ -85,6 +86,7 @@ Rebe
 Reif
 Rhad
 Rich
+Ro
 Ru
 Sa
 Salo
@@ -97,6 +99,7 @@ Ta
 Tho
 Tho
 Ti
+Ting
 Timo
 Tor
 Tra

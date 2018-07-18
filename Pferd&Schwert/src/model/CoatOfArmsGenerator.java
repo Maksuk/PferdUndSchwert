@@ -11,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1", "Fuchs1", "Bogen1", "Schnecke1", "Schwalbe1", "Eichenblatt1", "Ahornblatt1", "Buchenblatt1", "Wildschwein1", "Linde1", "Löwe3", "Fuchs2", "Einhorn1", "Drache2"};
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1", "Fuchs1", "Bogen1", "Schnecke1", "Schwalbe1", "Eichenblatt1", "Ahornblatt1", "Buchenblatt1", "Wildschwein1", "Linde1", "Löwe3", "Fuchs2", "Einhorn1", "Drache2", "Krone1", "Krone2", "Krone3"};
 	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal", "EinzelstreifenHorizontal", "Schildrand"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3", "StreifenDiagonal", "Streifendachform", "StreifenVForm"};
 	public Color[] farben = {new Color(250,250,250),//Weiß
@@ -39,6 +39,7 @@ public class CoatOfArmsGenerator {
     private BufferedImage overlay;
     private BufferedImage symbol1;
     private BufferedImage symbol2;
+    private String overlayName = "einfarbig";
     private String symbolLayout = "ohne";
     private Color[] drawnColors = new Color[4];
     
@@ -66,7 +67,7 @@ public class CoatOfArmsGenerator {
     	
     	//Schritt 0:
     	//Erstes Symbol auswuerfeln
-    	symbol1 =symbols[r.nextInt(symbols.length)];
+    	symbol1 = symbols[r.nextInt(symbols.length)];
     	//Farben auswählen
         pickColors();
     	
@@ -77,7 +78,7 @@ public class CoatOfArmsGenerator {
         int ws = r.nextInt(100);
         
         // Je nach Wahrscheinlichkeit ein Overlay auswählen
-        String overlayName = "einfarbig";
+        overlayName = "einfarbig";
         
         // 35% einfarbig
         if(ws < 12) { overlayName = "einfarbig"; }
@@ -187,26 +188,32 @@ public class CoatOfArmsGenerator {
                 symbolLayout = "ohne";
                 
                 // 2% ohne symbol
-                if(wsp < 5) { symbolLayout = "ohne"; }
+                if(wsp < 2) { symbolLayout = "ohne"; }
                 
                 // 23%
-                else if(wsp < 24) { symbolLayout = "einfach";}
+                else if(wsp < 18) { symbolLayout = "einfach";}
                 
                 // 25%
-                else if(wsp < 43) { symbolLayout = "zweiGespiegelt"; }
+                else if(wsp < 36) { symbolLayout = "zweiGespiegelt"; }
                 
                 // 25%
-                else if(wsp < 62) { symbolLayout = "zweiInversHor"; }
+                else if(wsp < 52) { symbolLayout = "zweiInversHor"; }
                 
                 // 25%
-                else if(wsp < 81) { symbolLayout = "zweiVerschHor"; 
+                else if(wsp < 68) { symbolLayout = "zweiVerschHor"; 
             	pattern = choosePattern(100, false, false);
             	symbol2 = symbols[r.nextInt(symbols.length)];
             	}
                 
                 // 25%
-                else if(wsp < 100) { symbolLayout = "einzelnRechts"; 
+                else if(wsp < 84) { symbolLayout = "einzelnRechts"; 
             	pattern = choosePattern(10, false, false);
+            	}
+                
+                // 25%
+                else if(wsp < 100) { symbolLayout = "zweiundeins"; 
+            	pattern = choosePattern(100, false, false);
+            	symbol2 = symbols[r.nextInt(symbols.length)];
             	}
 
             	break;
@@ -286,7 +293,7 @@ public class CoatOfArmsGenerator {
             case "horizontal2":
             	
             	overlay = shieldOverlays[5];
-            	pattern = choosePattern(40, false, false);
+            	pattern = choosePattern(40, true, true);
             	
             	// Je nach Wahrscheinlichkeit ein Smbollayout auswählen
                 symbolLayout = "ohne";
@@ -698,7 +705,7 @@ public class CoatOfArmsGenerator {
         switch(symbolLayout) {
         
         case "einfach":
-        	g.drawImage(symbol1, 80, 124, null);
+        	g.drawImage(symbol1, 76, 124, null);
         	break;
         	
         case "einfachFürRand":
@@ -785,6 +792,10 @@ public class CoatOfArmsGenerator {
         	} else {
         		g.drawImage(symbol1.getScaledInstance(250, 250, 2), 151, 55, null);
         	}
+        	if(overlayName == "horizontal1" || overlayName == "horizontal2"){
+        		symbol2 = dye(symbol2, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+        		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
+        	}
     		g.drawImage(symbol2.getScaledInstance(250, 250, 2), 151, 345, null);
         	break;
         	
@@ -858,7 +869,19 @@ public class CoatOfArmsGenerator {
         	} else {
         		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
         	}
+    		symbol2 = dye(symbol2, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
     		g.drawImage(symbol2.getScaledInstance(230, 230, 2), 286, 190, null);
+        	break;
+        	
+        case "zweiundeins":
+        	if(r.nextBoolean()){
+        		g.drawImage(flipVertical(symbol1).getScaledInstance(230, 230, 2), 34, 190, null);
+        	} else {
+        		g.drawImage(symbol1.getScaledInstance(230, 230, 2), 34, 190, null);
+        	}
+    		symbol2 = dye(symbol2, new Color(drawnColors[2].getRed(), drawnColors[2].getGreen(), drawnColors[2].getBlue(), 255));
+    		g.drawImage(symbol2.getScaledInstance(180, 180, 2), 305, 85, null);
+    		g.drawImage(symbol2.getScaledInstance(180, 180, 2), 305, 315, null);
         	break;
         	
         case "zweiGespiegelt":
