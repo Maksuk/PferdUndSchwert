@@ -18,6 +18,7 @@ bor
 borke
 born
 breite
+bresche
 bronn
 bruch
 brunn
@@ -116,6 +117,7 @@ len
 ler
 lern
 ich
+lichtung
 lied
 lind
 ling
