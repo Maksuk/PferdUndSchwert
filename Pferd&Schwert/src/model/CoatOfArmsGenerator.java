@@ -11,7 +11,7 @@ public class CoatOfArmsGenerator {
 
 	public Random r = new Random();
 	public String path;
-	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1", "Fuchs1", "Bogen1", "Schnecke1", "Schwalbe1", "Eichenblatt1", "Ahornblatt1", "Buchenblatt1", "Wildschwein1", "Linde1", "Löwe3", "Fuchs2", "Einhorn1", "Drache2", "Krone1", "Krone2", "Krone3", "Stier2", "Einhorn2", "Pferd2", "Schiff1", "Rose2", "Tulpe1"};
+	public String[] symbolNames = {"Drache1", "Gral1", "Lilie1", "Löwe1", "Krake1", "Kralle1", "Schlüssel1", "Greif1", "Stern1", "Anker1", "Muschel1", "Adler1", "Wolf1", "Rose1", "Vogel1", "Greif2", "Helm1", "Karpfen1", "Hufeisen1", "Pferd1", "Schwan1", "Armbrust1", "Helm2", "Helm3", "Löwe2", "Turm1", "Stier1", "Fuchs1", "Bogen1", "Schnecke1", "Schwalbe1", "Eichenblatt1", "Ahornblatt1", "Buchenblatt1", "Wildschwein1", "Linde1", "Löwe3", "Fuchs2", "Einhorn1", "Drache2", "Krone1", "Krone2", "Krone3", "Stier2", "Einhorn2", "Pferd2", "Schiff1", "Rose2", "Tulpe1", "Waage1", "Axt1", "Rad1", "Mond1", "Elch1", "Greif3"};
 	public String[] overlayNames = {"Halb", "Einzelviertel", "Viertel2", "Viertel", "Horizont", "Horizont2", "Diagonal", "Diagonal2", "Dreieck", "Dreieck2", "QuerViertel", "QuerViertel2", "EinzelstreifenVertikal", "EinzelstreifenHorizontal", "Schildrand", "DreieckUnten"};
 	public String[] patternNames = {"StreifenVertikal", "StreifenVertikal2", "StreifenHorizontal", "Schachbrett", "Schachbrett2", "Schachbrett3", "StreifenDiagonal", "Streifendachform", "StreifenVForm"};
 	public Color[] farben = {new Color(252,252,252),//Weiß
@@ -19,7 +19,7 @@ public class CoatOfArmsGenerator {
 							new Color(160,0,0),//Rot
 							new Color(30,150,30),//Hellgrün
 							new Color(0,0,160),//Dunkelblau
-							new Color(200,200,0),//Dunkelgelb
+							new Color(220,220,0),//Dunkelgelb
 							new Color(90,0,0), //Dunkelrot
 							new Color(100,100,255),//Hellblau
 							new Color(0,80,0),//Dunkelgrün
@@ -29,9 +29,9 @@ public class CoatOfArmsGenerator {
 							new Color(10,90,90),//Türkis 
 							new Color(0,0,80),//Dunkelblau
 							new Color(183,51,135),//Magenta
-							new Color(225,224,202),//Beige
-							new Color(157,126,31),//Braunorange
-							new Color(240,240,10)};//Gelb
+							/*new Color(225,224,202),//Beige*/
+							/*new Color(157,126,31),//Braunorange*/
+							/*new Color(240,240,10)*/};//Gelb
 	public BufferedImage[] symbols = new BufferedImage[symbolNames.length];
 	public BufferedImage[] shieldOverlays = new BufferedImage[overlayNames.length+1];
 	public BufferedImage[] patterns = new BufferedImage[patternNames.length];
@@ -749,7 +749,7 @@ public class CoatOfArmsGenerator {
         switch(symbolLayout) {
         
         case "einfach":
-        	g.drawImage(symbol1, 76, 124, null);
+        	g.drawImage(symbol1, 76, 104, null);
         	break;
         	
         case "einfachFürRand":
