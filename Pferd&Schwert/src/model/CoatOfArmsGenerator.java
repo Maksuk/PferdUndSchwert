@@ -83,7 +83,7 @@ public class CoatOfArmsGenerator {
         // Je nach Wahrscheinlichkeit ein Overlay auswählen
         overlayName = "einfarbig";
         
-        // 35% einfarbig
+        // 12% einfarbig
         if(ws < 12) { overlayName = "einfarbig"; }
         
         // 5% diagonal 1
