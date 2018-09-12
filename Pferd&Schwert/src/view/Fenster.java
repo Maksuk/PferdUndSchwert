@@ -13,6 +13,8 @@ import java.io.IOException;
 
 
 public class Fenster extends JFrame {
+	
+	public WappenAuswahlFenster wappenAuswahlFenster;
 
 	public Fenster(String standardname, String standardstadt, BufferedImage wappen, FensterManager m) {
 		//Fenster erzeugen
@@ -164,7 +166,7 @@ public class Fenster extends JFrame {
 	    stadtCheckboxPanel.add(gebirge, BorderLayout.EAST);
 	    
 	    //Button Listener
-		ButtonListener l = new ButtonListener(textField, textFieldS, wappenBildPanel, m);
+		ButtonListener l = new ButtonListener(textField, textFieldS, wappenBildPanel, m, wappenAuswahlFenster);
 		button.addActionListener(l);
 		maennlich.addActionListener(l);
 		weiblich.addActionListener(l);

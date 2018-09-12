@@ -5,6 +5,7 @@ import controller.FensterManager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ButtonListener implements ActionListener
@@ -19,14 +20,17 @@ public class ButtonListener implements ActionListener
   private boolean kueste = true;
   private boolean fluss = true;
   private boolean gebirge = true;
+  
+  public WappenAuswahlFenster w;
 
   // Konstruktor
-  public ButtonListener(JTextField tfn, JTextField tfs, JPanel pn, FensterManager ma)
+  public ButtonListener(JTextField tfn, JTextField tfs, JPanel pn, FensterManager ma, WappenAuswahlFenster wa)
   {
     textFieldN = tfn;
     textFieldS = tfs;
     imagePanel = pn;
     m = ma;
+    w =wa;
   }
 
  // Wenn ein Knopf gedrueckt wurde
@@ -74,5 +78,12 @@ public class ButtonListener implements ActionListener
 	  if(ae.getActionCommand().equals("gebirge")) {
 		  gebirge = !gebirge;
 	  }
+	  
+	  //neue Wappenauswahl
+	  /*BufferedImage[] wappenAuswahl = new BufferedImage[9];
+		for(int i=0; i<9; i++){
+			wappenAuswahl[i] = m.cGenerator.generateCoatOfArms();
+		}
+		w = new WappenAuswahlFenster(wappenAuswahl, m);*/
   }
 }

@@ -19,6 +19,8 @@ public class NamesGenerator {
 	
 	// Listen fuer Stadtnamen
 	static String[] town_prae_default = new String[1200];
+	static String[] town_prae_default_adj = new String[1200];
+	static String[] town_prae_default_nou = new String[1200];
 	static String[] town_prae_coast = new String[200];
 	static String[] town_prae_river = new String[200];
 	static String[] town_prae_mountains = new String[200];
@@ -70,6 +72,8 @@ public class NamesGenerator {
         
         // Lade Listen fuer Stadtnamen
         ladeListe("towns\\town_prae_default.txt", town_prae_default);
+        ladeListe("towns\\town_prae_default_adj.txt", town_prae_default_adj);
+        ladeListe("towns\\town_prae_default_nou.txt", town_prae_default_nou);
         ladeListe("towns\\town_prae_coast.txt", town_prae_coast);
         ladeListe("towns\\town_prae_river.txt", town_prae_river);
         ladeListe("towns\\town_prae_mountains.txt", town_prae_mountains);
@@ -113,13 +117,19 @@ public class NamesGenerator {
 		// Stadtnamen initialisieren
 		String s = "";
 		String v = "";
+		String z = "";
 		String n = "";
 		
 		// Unschoen dahingehackte Fallunterscheidung fuer die 8 Faelle von Listenkombinationen:
 		
 		// Fall 1: nur Standardnamen
 		if(!coast && !river && !mountains) {
-			s = town_prae_default[random.nextInt(wortanzahl(town_prae_default) + 1)] + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
+			if(random.nextBoolean()==true){
+			z=town_prae_default_nou[random.nextInt(wortanzahl(town_prae_default_nou) + 1)].toLowerCase();
+				s = town_prae_default_adj[random.nextInt(wortanzahl(town_prae_default_adj) + 1)] + z + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
+			}else{
+				s = town_prae_default[random.nextInt(wortanzahl(town_prae_default) + 1)] + town_suff_default[random.nextInt(wortanzahl(town_suff_default) + 1)];
+			}
 		}
 		
 		// Fall 2: zusaetzlich Kuestennamen
