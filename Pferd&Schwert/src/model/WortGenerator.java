@@ -21,7 +21,7 @@ public class WortGenerator {
 	
 	public String generateWord(){
 		String word =startConsonants[r.nextInt(startConsonants.length-1)];
-		int wordLength = r.nextInt(1)+2;
+		int wordLength = r.nextInt(4)+2;
 		for(int i =0; i<wordLength; i++){
 			if ((i % 2) == 1){
 				if(r.nextInt(5)>0){

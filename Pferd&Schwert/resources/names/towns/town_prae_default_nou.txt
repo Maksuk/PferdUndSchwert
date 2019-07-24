@@ -350,6 +350,8 @@ Rahmen
 Rand
 Ranken
 Rappen
+Rassel
+Rast
 Rath
 Rats
 Ratten
